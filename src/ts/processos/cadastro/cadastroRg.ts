@@ -1,4 +1,4 @@
-import ExisteDocumento from "../../../utils/existeDocumento";
+import ExisteDocumento from "../../utils/existeDocumento";
 import Processo from "../../abstracoes/processo";
 import Armazem from "../../dominio/armazem";
 import { TipoDocumento } from "../../enumeracoes/TipoDocumento";

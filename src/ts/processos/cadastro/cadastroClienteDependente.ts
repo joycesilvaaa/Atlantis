@@ -1,4 +1,4 @@
-import EncontraCliente from "../../../utils/encontraCliente"
+import EncontraCliente from "../../utils/encontraCliente"
 import Processo from "../../abstracoes/processo"
 import Armazem from "../../dominio/armazem"
 import Cliente from "../../modelos/cliente"

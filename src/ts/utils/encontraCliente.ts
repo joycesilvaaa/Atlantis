@@ -1,4 +1,4 @@
-import Cliente from "../ts/modelos/cliente";
+import Cliente from "../modelos/cliente";
 
 export default function EncontraCliente(clientes: Cliente[], numero: string): Cliente | null {
     for (let cliente of clientes) {

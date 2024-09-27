@@ -1,4 +1,4 @@
-import Cliente from "../ts/modelos/cliente";
+import Cliente from "../modelos/cliente";
 
 export default function ExisteTelefone(clientes: Cliente[], ddd: string ,numero: string): boolean {
     for (let cliente of clientes) {

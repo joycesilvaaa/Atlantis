@@ -1,4 +1,4 @@
-import Cliente from "../ts/modelos/cliente";
+import Cliente from "../modelos/cliente";
 
 export default function ExisteDocumento(clientes: Cliente[], numero: string): boolean {
     for (let cliente of clientes) {
