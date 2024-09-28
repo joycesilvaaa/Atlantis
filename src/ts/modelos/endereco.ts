@@ -24,8 +24,12 @@ export default class Endereco implements Prototipo {
     public get Pais() {return this.pais}
     public get CodigoPostal() {return this.codigoPostal}
 
-    public clonar(): Prototipo {
-        let endereco = new Endereco(this.rua, this.bairro, this.cidade, this.estado, this.pais, this.codigoPostal)
-        return endereco
-    }
+    public setRua(novaRua: string){this.rua = novaRua}
+    public setBairro(novoBairro: string){this.bairro = novoBairro}
+    public setCidade(novaCidade: string){this.cidade = novaCidade}
+    public setEstado(novoEstado: string){this.estado = novoEstado}
+    public setPais(novoPais: string){this.rua = novoPais}
+    public setCodigoPostal(novoCodigoPostal: string){this.rua = novoCodigoPostal}
+    
+    public clonar(): Prototipo {return new Endereco(this.rua, this.bairro, this.cidade, this.estado, this.pais, this.codigoPostal)}
 }
