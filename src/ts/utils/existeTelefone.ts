@@ -1,12 +1,12 @@
 import Cliente from "../modelos/cliente";
+import Telefone from "../modelos/telefone";
 
-export default function ExisteTelefone(clientes: Cliente[], ddd: string ,numero: string): boolean {
-    for (let cliente of clientes) {
-        for (let telefone of cliente.Telefones) {
-            if (telefone.Ddd === ddd && telefone.Numero === numero) {
-                return true
-            }
+export default function ExisteTelefone(clientes: Cliente[], ddd: string ,numero: string): [boolean, Telefone | null]{
+    for (const cliente of clientes) {
+        const telefoneEncontrado = cliente.Telefones.find(telefone => telefone.Ddd === ddd && telefone.Numero === numero);
+        if (telefoneEncontrado) {
+            return [true, telefoneEncontrado];
         }
     }
-    return false
+    return [false, null];
 }

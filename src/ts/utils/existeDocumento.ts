@@ -1,12 +1,12 @@
 import Cliente from "../modelos/cliente";
+import Documento from "../modelos/documento";
 
-export default function ExisteDocumento(clientes: Cliente[], numero: string): boolean {
-    for (let cliente of clientes) {
-        for (let documento of cliente.Documentos) {
-            if (documento.Numero === numero) {
-                return true
-            }
+export default function ExisteDocumento(clientes: Cliente[], numero: string):[boolean, Documento | null] {
+    for (const cliente of clientes) {
+        const documentoEncontrado = cliente.Documentos.find(doc => doc.Numero === numero);
+        if (documentoEncontrado) {
+            return [true, documentoEncontrado];
         }
     }
-    return false
+    return [false, null];
 }
