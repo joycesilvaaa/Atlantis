@@ -13,11 +13,13 @@ export default class CadastrarTelefonesCliente extends Processo{
     }
     processar(): void {
         let armazem = Armazem.InstanciaUnica
-        console.log('Iniciando cadastro de Telefones')
+        console.log('------------------------------------')
+        console.log('  Iniciando cadastro de Telefones')
+        console.log('------------------------------------')
         while (true){
             let ddd = this.entrada.receberTexto('Qual o DDD do telefone?')
             let numero = this.entrada.receberTexto('Qual o numero de telefone?')
-            let telefoneExistente = ExisteTelefone(armazem.Clientes, ddd, numero) 
+            let telefoneExistente = ExisteTelefone(armazem.Clientes, ddd, numero)[0]
             if(telefoneExistente){
                 console.log('Telefone já regitrado no sistema.')
                 continue
@@ -29,6 +31,8 @@ export default class CadastrarTelefonesCliente extends Processo{
                 break
             }
         }
+        console.log('------------------------------------')
         console.log('Finalizando registro de telefones...')
+        console.log('------------------------------------')
     }
 }

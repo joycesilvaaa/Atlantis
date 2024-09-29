@@ -15,7 +15,7 @@ export default class CadastroCpf extends Processo {
     processar(): void {
         let armazem = Armazem.InstanciaUnica
         let numero = this.entrada.receberTexto('Qual o número do documento?')
-        let documentoExistente = ExisteDocumento(armazem.Clientes, numero)
+        let documentoExistente = ExisteDocumento(armazem.Clientes, numero)[0]
         if(documentoExistente){
             console.log('Documento já registrado')
             return

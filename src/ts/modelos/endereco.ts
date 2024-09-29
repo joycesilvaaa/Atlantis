@@ -28,8 +28,8 @@ export default class Endereco implements Prototipo {
     public setBairro(novoBairro: string){this.bairro = novoBairro}
     public setCidade(novaCidade: string){this.cidade = novaCidade}
     public setEstado(novoEstado: string){this.estado = novoEstado}
-    public setPais(novoPais: string){this.rua = novoPais}
-    public setCodigoPostal(novoCodigoPostal: string){this.rua = novoCodigoPostal}
+    public setPais(novoPais: string){this.pais = novoPais}
+    public setCodigoPostal(novoCodigoPostal: string){this.codigoPostal = novoCodigoPostal}
     
     public clonar(): Prototipo {return new Endereco(this.rua, this.bairro, this.cidade, this.estado, this.pais, this.codigoPostal)}
 }

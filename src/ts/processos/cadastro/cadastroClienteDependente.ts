@@ -4,7 +4,7 @@ import Armazem from "../../dominio/armazem"
 import Cliente from "../../modelos/cliente"
 import Endereco from "../../modelos/endereco"
 import Telefone from "../../modelos/telefone"
-import CadastrarDocumentosCliente from "../cadastrarDocumentosCliente"
+import CadastrarDocumentosCliente from "../tipos/cadastrarDocumentosCliente"
 
 
 export default class CadastroClienteDependente extends Processo {
