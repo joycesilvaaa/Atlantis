@@ -4,10 +4,11 @@ import Armazem from "../../dominio/armazem";
 import ImpressorCliente from "../../impressores/impressorCliente";
 import EditarEndereco from "./editarEndereco";
 import PossuiTitular from "../../utils/possuiTitular";
-import EdicaoDocumentosCliente from "../tipos/edicaoDocumentosCliente";
 import EditarTelefonesCliente from "./editarTelefonesCliente";
 import CadastrarDocumentosCliente from "../tipos/cadastrarDocumentosCliente";
 import Cliente from "../../modelos/cliente";
+import EditarDocumento from "./editarDocumento";
+import CadastrarTelefonesCliente from "../cadastro/cadastroTelefonesCliente";
 
 export default class EditarCliente extends Processo{
     private armazem: Armazem
@@ -38,7 +39,7 @@ export default class EditarCliente extends Processo{
             cliente.setNomeSocial(novoNomeSocial)
         }
         let novaDataNascimento = this.entrada.receberData('Digite a data de nascimento (ou pressione Enter para manter):')
-        if (novaDataNascimento){
+        if (novaDataNascimento && !isNaN(novaDataNascimento.getTime())){
             cliente.setDataNascimento(novaDataNascimento)
         }
 
@@ -49,6 +50,7 @@ export default class EditarCliente extends Processo{
         console.log('| 4 - Editar Telefone (Opção apenas para titular)')
         console.log('| 5 - Editar Documeto')
         console.log('| 6 - Finalizar Atualização')
+        
         let opcao = this.entrada.receberNumero('Digite a opção que deseja:')
 
         switch(opcao){
@@ -81,7 +83,7 @@ export default class EditarCliente extends Processo{
     }
     private adicionarTelefone(cliente: Cliente, clienteTitular: boolean){
         if(!clienteTitular){
-            this.processo = new CadastrarDocumentosCliente(cliente)
+            this.processo = new CadastrarTelefonesCliente(cliente)
             this.processo.processar()         
         }else{
             console.log('Esta opção é apenas para titulares.');
@@ -104,7 +106,7 @@ export default class EditarCliente extends Processo{
         }
     }
     private editarDocumetos(cliente: Cliente){
-        this.processo = new EdicaoDocumentosCliente(cliente)
+        this.processo = new EditarDocumento(cliente)
         this.processo.processar()
     }
 }

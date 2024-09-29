@@ -31,8 +31,19 @@ export default class CadastrarTelefonesCliente extends Processo{
                 break
             }
         }
+        if(this.cliente.Dependentes.length > 0){
+            this.atualizaTelefoneDependentes(this.cliente.Dependentes,this.cliente)
+        }
         console.log('------------------------------------')
         console.log('Finalizando registro de telefones...')
         console.log('------------------------------------')
+    }
+    private atualizaTelefoneDependentes(dependentes: Cliente[], titular: Cliente) {
+        console.log('-------------------------------------------')
+        console.log('  Atualizando Telefones de Dependentes...')
+        console.log('-------------------------------------------')
+        for (const dependente of dependentes) {
+            dependente.setTelefones(titular.Telefones.map(tel => tel.clonar() as Telefone))
+        }
     }
 }

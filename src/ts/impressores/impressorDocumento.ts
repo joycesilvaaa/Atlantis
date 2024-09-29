@@ -9,7 +9,7 @@ export default class ImpressorDocumento implements Impressor {
     }
 
     imprimir(): string {
-        let impressao =`****************************\n` 
+        let impressao =`` 
             + `| Documento:\n`
             + `| Tipo: ${this.documento.Tipo}\n`
             + `| Data expedição: ${this.documento.DataExpedicao.toLocaleDateString()}\n`

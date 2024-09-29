@@ -36,4 +36,5 @@ export default class Cliente {
     public setTelefones(novosTelefones: Telefone[]){this.telefones = novosTelefones}
     public setEndereco(novoEndereco: Endereco) { this.endereco = novoEndereco }
     public setTitular(novoTitular: Cliente) {this.titular = novoTitular}
+    public setDocumentos(novosDocumentos: Documento[]){ this.documentos = novosDocumentos}
 }

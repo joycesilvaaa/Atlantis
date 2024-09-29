@@ -1,6 +1,8 @@
 import Processo from "../../abstracoes/processo"
 import Armazem from "../../dominio/armazem"
 import ImpressorDocumentos from "../../impressores/impressorDocumentos"
+import Cliente from "../../modelos/cliente"
+import Telefone from "../../modelos/telefone"
 import EncontraCliente from "../../utils/encontraCliente"
 import ExisteDocumento from "../../utils/existeDocumento"
 import ExisteTelefone from "../../utils/existeTelefone"
@@ -57,9 +59,17 @@ export default class ExcluirTelefone extends Processo {
         }
         
         cliente.Telefones.splice(indice, 1)
+        if(cliente.Dependentes.length > 0){
+            this.atualizaTelefoneDependentes(cliente.Dependentes,cliente)
+        }
         
         console.log('----------------------------------------')
         console.log('           Telefone Excluído')
         console.log('----------------------------------------')
+    }
+    private atualizaTelefoneDependentes(dependentes: Cliente[], titular: Cliente) {
+        for (const dependente of dependentes) {
+            dependente.setTelefones(titular.Telefones.map(tel => tel.clonar() as Telefone))
+        }
     }
 }

@@ -31,10 +31,10 @@ export default class EditarTelefonesCliente extends Processo {
         console.log(this.impressor.imprimir())
 
 
-        let ddd = this.entrada.receberTexto('Qual o DDD do telefone?').trim()
-        let numero = this.entrada.receberTexto('Qual o numero de telefone?').trim()
+        let ddd = this.entrada.receberTexto('Qual o DDD do telefone que deseja editar?').trim()
+        let numero = this.entrada.receberTexto('Qual o numero de telefone que deseja editar?').trim()
         let telefoneAtual = ExisteTelefone(this.armazem.Clientes, ddd, numero)[1]
-        if (telefoneAtual === null) {
+        if (!telefoneAtual) {
             console.log('Telefone não encontrado!')
             return
         }
@@ -53,9 +53,19 @@ export default class EditarTelefonesCliente extends Processo {
         }
         telefonesAtuais[indiceTelefone].setDdd(novoDdd)
         telefonesAtuais[indiceTelefone].setNumero(novoNumero)
-        //falta atualizar nos dependentes
-
-
-        console.log('Finalizando atualização de telefones...')
+        
+        if(this.cliente.Dependentes.length > 0){
+            this.atualizaTelefoneDependentes(this.cliente.Dependentes,this.cliente)
+        }
+        
+        console.log('  Telefone Atualizado :) ')
+    }
+    private atualizaTelefoneDependentes(dependentes: Cliente[], titular: Cliente) {
+        console.log('-------------------------------------------')
+        console.log('  Atualizando Telefones de Dependentes...')
+        console.log('-------------------------------------------')
+        for (const dependente of dependentes) {
+            dependente.setTelefones(titular.Telefones.map(tel => tel.clonar() as Telefone))
+        }
     }
 }

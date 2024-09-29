@@ -7,7 +7,7 @@ export default class ImpressorEndereco implements Impressor {
         this.endereco = endereco
     }
     imprimir(): string {
-        let impressao =`****************************\n` 
+        let impressao =`` 
             + `| Endereco:\n`
             + `| rua: ${this.endereco.Rua}\n`
             + `| bairro: ${this.endereco.Bairro}\n`

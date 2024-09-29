@@ -19,26 +19,21 @@ export default class ListagemDependenteDeUmTitular extends Processo {
         console.log('---------------------------------------------------')
         let numero = this.entrada.receberTexto('Digite o numero de documento do Titular:')
         let clienteTitular = EncontraCliente(this.clientes, numero)
-        if(!clienteTitular){
+        if (!clienteTitular) {
             console.log('Cliente não encontrado!')
-            return 
+            return
         }
-        if(clienteTitular.Dependentes.length > 0){
+        if (clienteTitular.Dependentes.length === 0) {
             console.log('Cliente não possui dependentes cadastrados!')
-            return 
+            return
         }
+        console.log('---------------------------------------------------')
+        console.log(`       Dependentes do Cliente ${clienteTitular.Nome.toLocaleUpperCase()}:`)
+        console.log('---------------------------------------------------')
         clienteTitular.Dependentes.forEach(dependente => {
-            if (this.titular(dependente)) {
-                this.impressor = new ImpressaorCliente(dependente)
-                console.log(this.impressor.imprimir())
-            }
+
+            this.impressor = new ImpressaorCliente(dependente)
+            console.log(this.impressor.imprimir())
         })
-    }
-    private titular(cliente: Cliente): boolean {
-        let verificacao = false
-        if (cliente.Titular == undefined) {
-            verificacao = true
-        }
-        return verificacao
     }
 }
