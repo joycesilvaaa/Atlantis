@@ -48,13 +48,16 @@ export default class EditarEndereco extends Processo{
         }
 
         if(this.cliente.Dependentes.length > 0){
-            console.log('Atualizando Endereço de Dependentes...')
-            for (const dependente of this.cliente.Dependentes){
-                dependente.setEndereco(this.cliente.Endereco.clonar() as Endereco)
-            }
+            this.atualizaEnderecoDependente(this.cliente.Dependentes, this.cliente)
         }
-        console.log('-------------------------')
         console.log('  Endereço Atualizado :)')
-        console.log('-------------------------')
+    }
+    private atualizaEnderecoDependente(dependentes: Cliente[], titular: Cliente){
+        console.log('-------------------------------------------')
+        console.log('  Atualizando Endereço de Dependentes...')
+        console.log('-------------------------------------------')
+        for (const dependente of dependentes){
+            dependente.setEndereco(titular.Endereco.clonar() as Endereco)
+        }
     }
 }
