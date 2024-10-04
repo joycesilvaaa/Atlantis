@@ -1,26 +1,29 @@
 import Processo from "../../abstracoes/processo";
 import ImpressorEndereco from "../../impressores/impressorEndereco";
+import Impressor from "../../interfaces/impressor";
 import Cliente from "../../modelos/cliente";
-import Endereco from "../../modelos/endereco";
+import AtualizaEnderecoDependente from "../../utils/atualizaEnderecoDependente";
 
 export default class EditarEndereco extends Processo{
     private cliente: Cliente
-    private impressor!: ImpressorEndereco
+    private impressor!: Impressor
     constructor(cliente: Cliente){
         super()
         this.cliente = cliente
     }
     processar(): void {
-        console.log('Iniciando Atualização de Endereço...')
+        console.log('---------------------------------------------------');
+        console.log('           INICIANDO EDIÇÃO DE ENDEREÇO');
+        console.log('---------------------------------------------------');
 
         let enderecoAtual = this.cliente.Endereco
 
-        console.log('-----------------------------')
-        console.log('       Dados Atuais:')
-        console.log('-----------------------------')
+        console.log('---------------------------------------------------');
+        console.log('| Dados Atuais:');
+        console.log('---------------------------------------------------');
         this.impressor = new ImpressorEndereco(enderecoAtual)
         console.log(this.impressor.imprimir())
-        console.log('-----------------------------')
+        console.log('---------------------------------------------------');
         
         let novaRua = this.entrada.receberTexto('Digite o novo nome da rua (ou pressione Enter para manter):').trim()
         if(novaRua){
@@ -48,16 +51,10 @@ export default class EditarEndereco extends Processo{
         }
 
         if(this.cliente.Dependentes.length > 0){
-            this.atualizaEnderecoDependente(this.cliente.Dependentes, this.cliente)
+            AtualizaEnderecoDependente(this.cliente.Dependentes, this.cliente)
         }
-        console.log('  Endereço Atualizado :)')
-    }
-    private atualizaEnderecoDependente(dependentes: Cliente[], titular: Cliente){
-        console.log('-------------------------------------------')
-        console.log('  Atualizando Endereço de Dependentes...')
-        console.log('-------------------------------------------')
-        for (const dependente of dependentes){
-            dependente.setEndereco(titular.Endereco.clonar() as Endereco)
-        }
+        console.log('---------------------------------------------------');
+        console.log('               ENDEREÇO ATUALIZADO');
+        console.log('---------------------------------------------------');
     }
 }

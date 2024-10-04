@@ -20,7 +20,7 @@ export default class CadastroRg extends Processo {
             console.log('Documento já registrado')
             return
         }
-        let dataExpedicao = this.entrada.receberData('Qual a data de expedição do documento?')
+        let dataExpedicao = this.entrada.receberData('Qual a data de expedição do documento')
         let rg = new Documento(numero, TipoDocumento.RG, dataExpedicao)
         this.cliente.Documentos.push(rg)
     }

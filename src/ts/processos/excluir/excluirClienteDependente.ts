@@ -13,9 +13,9 @@ export default class ExcluirClienteDependente extends Processo {
     }
 
     processar(): void {
-        console.log('----------------------------------------')
-        console.log('   Iniciando Exclusão de Dependente:')
-        console.log('----------------------------------------')
+        console.log('---------------------------------------------------');
+        console.log('          INICIANDO EXCLUSÃO DE DEPENDENTE');
+        console.log('---------------------------------------------------');
 
         let numeroDocumento = this.entrada.receberTexto('Digite o número do documento do dependente:')
         let dependente = EncontraCliente(this.armazem.Clientes, numeroDocumento)
@@ -56,8 +56,8 @@ export default class ExcluirClienteDependente extends Processo {
         
         this.armazem.Clientes.splice(indice, 1)
         
-        console.log('----------------------------------------')
-        console.log('           Dependente Excluído')
-        console.log('----------------------------------------')
+        console.log('---------------------------------------------------');
+        console.log('               DEPENDENTE EXCLUÍDO');
+        console.log('---------------------------------------------------');
     }
 }

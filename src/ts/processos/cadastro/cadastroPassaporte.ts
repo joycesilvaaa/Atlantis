@@ -20,7 +20,7 @@ export default class CadastroPassaporte extends Processo {
             console.log('Documento já registrado')
             return
         }
-        let dataExpedicao = this.entrada.receberData('Qual a data de expedição do documento?')
+        let dataExpedicao = this.entrada.receberData('Qual a data de expedição do documento')
         let passaporte = new Documento(numero, TipoDocumento.Passaporte, dataExpedicao)
         this.cliente.Documentos.push(passaporte)
     }

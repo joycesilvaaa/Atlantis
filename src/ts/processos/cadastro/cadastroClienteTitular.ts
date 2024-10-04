@@ -7,10 +7,12 @@ import CadastrarTelefonesCliente from "./cadastroTelefonesCliente";
 
 export default class CadastroClienteTitular extends Processo {
     processar(): void {
-        console.log('Iniciando o cadastro de um novo cliente...')
+        console.log('---------------------------------------------------');
+        console.log('      INICIANDO O CADASTRO DE UM NOVO CLIENTE');
+        console.log('---------------------------------------------------');
         let nome = this.entrada.receberTexto('Qual o nome do novo cliente?')
         let nomeSocial = this.entrada.receberTexto('Qual o nome social do novo cliente?')
-        let dataNascimento = this.entrada.receberData('Qual a data de nascimento?')
+        let dataNascimento = this.entrada.receberData('Qual a data de nascimento')
         let cliente = new Cliente(nome, nomeSocial, dataNascimento)
 
         this.processo = new CadastroEnderecoTitular(cliente)
@@ -25,6 +27,8 @@ export default class CadastroClienteTitular extends Processo {
         let armazem = Armazem.InstanciaUnica
         armazem.Clientes.push(cliente)
 
-        console.log('Finalizando o cadastro do cliente...')
+        console.log('---------------------------------------------------');
+        console.log('               FINALIZANDO CADASTRO');
+        console.log('---------------------------------------------------');
     }
 }

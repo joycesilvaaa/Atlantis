@@ -16,7 +16,7 @@ export default class ListagemTitularDoDependente extends Processo {
     processar(): void {
         console.clear()
         console.log('---------------------------------------------------')
-        console.log('  Listagem do Titular de um dependente especifico')
+        console.log('               TITULAR DE DEPENDENTE')
         console.log('---------------------------------------------------')
         let numero = this.entrada.receberTexto('Digite o numero de documento do dependente:')
         let dependente = EncontraCliente(this.clientes, numero)

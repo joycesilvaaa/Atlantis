@@ -15,7 +15,7 @@ export default class ListagemDependenteDeUmTitular extends Processo {
     processar(): void {
         console.clear()
         console.log('---------------------------------------------------')
-        console.log('Listagem de Dependentes para um titular especifico')
+        console.log('       DEPENDENTES DE UM TITULAR ESPECÍFICO')
         console.log('---------------------------------------------------')
         let numero = this.entrada.receberTexto('Digite o numero de documento do Titular:')
         let clienteTitular = EncontraCliente(this.clientes, numero)
@@ -31,9 +31,11 @@ export default class ListagemDependenteDeUmTitular extends Processo {
         console.log(`       Dependentes do Cliente ${clienteTitular.Nome.toLocaleUpperCase()}:`)
         console.log('---------------------------------------------------')
         clienteTitular.Dependentes.forEach(dependente => {
-
             this.impressor = new ImpressaorCliente(dependente)
             console.log(this.impressor.imprimir())
         })
+        console.log(`-------------------------------------------------`)
+        console.log('               FIM DA LISTAGEM')
+        console.log(`-------------------------------------------------`)
     }
 }

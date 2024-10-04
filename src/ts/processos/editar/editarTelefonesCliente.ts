@@ -5,11 +5,13 @@ import Cliente from "../../modelos/cliente";
 import Telefone from "../../modelos/telefone";
 import ImpressorTelefones from "../../impressores/impressorTelefones";
 import ImpressorTelefone from "../../impressores/impressorTelefone";
+import Impressor from "../../interfaces/impressor";
+import AtualizaTelefoneDependentes from "../../utils/atualizaTelefonesDependentes";
 
 export default class EditarTelefonesCliente extends Processo {
     private cliente: Cliente
     private armazem: Armazem
-    private impressor!: ImpressorTelefones | ImpressorTelefone
+    private impressor!: Impressor
     constructor(cliente: Cliente) {
         super()
         this.cliente = cliente
@@ -17,9 +19,9 @@ export default class EditarTelefonesCliente extends Processo {
         this.armazem = Armazem.InstanciaUnica
     }
     processar(): void {
-        console.log('-----------------------------------')
-        console.log(' Iniciando Edição de Telefones...')
-        console.log('-----------------------------------')
+        console.log('---------------------------------------------------');
+        console.log('          INICIANDO EDIÇÃO DE TELEFONE')
+        console.log('---------------------------------------------------');
 
         let telefonesAtuais = this.cliente.Telefones
         if (telefonesAtuais.length === 0) {
@@ -55,17 +57,11 @@ export default class EditarTelefonesCliente extends Processo {
         telefonesAtuais[indiceTelefone].setNumero(novoNumero)
         
         if(this.cliente.Dependentes.length > 0){
-            this.atualizaTelefoneDependentes(this.cliente.Dependentes,this.cliente)
+            AtualizaTelefoneDependentes(this.cliente.Dependentes,this.cliente)
         }
-        
-        console.log('  Telefone Atualizado :) ')
-    }
-    private atualizaTelefoneDependentes(dependentes: Cliente[], titular: Cliente) {
-        console.log('-------------------------------------------')
-        console.log('  Atualizando Telefones de Dependentes...')
-        console.log('-------------------------------------------')
-        for (const dependente of dependentes) {
-            dependente.setTelefones(titular.Telefones.map(tel => tel.clonar() as Telefone))
-        }
+
+        console.log('---------------------------------------------------');
+        console.log('             TELEFONE ATUALIZADO')
+        console.log('---------------------------------------------------');
     }
 }

@@ -15,7 +15,7 @@ export default class VerClienteEspecifico extends Processo {
     processar(): void {
         console.clear()
         console.log('---------------------------------------------------')
-        console.log('           Ver Cliente Especifico')
+        console.log('               CLIENTE ESPECÍFICO')
         console.log('---------------------------------------------------')
         let numero = this.entrada.receberTexto('Digite o numero de documento do cliente:')
         let cliente = EncontraCliente(this.clientes, numero)

@@ -11,9 +11,9 @@ export default class  ExcluirClienteTitular extends Processo{
         this.armazem = Armazem.InstanciaUnica
     }
     processar(): void {
-        console.log('----------------------------------------')
-        console.log(' Iniciando Exclusão de Cliente Titular:')
-        console.log('----------------------------------------')
+        console.log('---------------------------------------------------');
+        console.log('           INICIANDO EXCLUSÃO DE TITULAR');
+        console.log('---------------------------------------------------');
 
         let numeroDocumento = this.entrada.receberTexto('Digite o numero do documento do cliente:')
         let cliente = EncontraCliente(this.armazem.Clientes, numeroDocumento)
@@ -44,15 +44,15 @@ export default class  ExcluirClienteTitular extends Processo{
             return
         }
         this.armazem.Clientes.splice(indice, 1)
-        console.log('----------------------------------------')
-        console.log('           Cliente Excluido')
-        console.log('----------------------------------------')
+        console.log('---------------------------------------------------');
+        console.log('               CLIENTE EXCLUÍDO');
+        console.log('---------------------------------------------------');
     }
     private excluirTodosDependentes(dependentes: Cliente[]){
         for (const dependente of dependentes){
-            const indice = this.armazem.Clientes.indexOf(dependente) // busca o indice
-            if (indice !== -1){//se for encontrado o indice do dependente
-               this.armazem.Clientes.splice(indice, 1) // (posição do elemento que vai ser removido, quantidade de elementos vão ser removidos a partir dele)
+            const indice = this.armazem.Clientes.indexOf(dependente)
+            if (indice !== -1){
+               this.armazem.Clientes.splice(indice, 1)
             }
         }
     }

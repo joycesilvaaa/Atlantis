@@ -9,15 +9,19 @@ import CadastrarDocumentosCliente from "../tipos/cadastrarDocumentosCliente";
 import Cliente from "../../modelos/cliente";
 import EditarDocumento from "./editarDocumento";
 import CadastrarTelefonesCliente from "../cadastro/cadastroTelefonesCliente";
+import Impressor from "../../interfaces/impressor";
 
 export default class EditarCliente extends Processo{
     private armazem: Armazem
-    private impressor!: ImpressorCliente
+    private impressor!: Impressor
     constructor(){
         super()
         this.armazem = Armazem.InstanciaUnica
     }
     processar(): void {
+        console.log('---------------------------------------------------');
+        console.log('            INICIANDO EDIÇÃO DE CLIENTE');
+        console.log('---------------------------------------------------');
         let numeroDocumento = this.entrada.receberTexto('Digite o numero do documento do cliente:')
         let cliente = EncontraCliente(this.armazem.Clientes, numeroDocumento)
         if(!cliente){
@@ -38,11 +42,11 @@ export default class EditarCliente extends Processo{
         if (novoNomeSocial){
             cliente.setNomeSocial(novoNomeSocial)
         }
-        let novaDataNascimento = this.entrada.receberData('Digite a data de nascimento (ou pressione Enter para manter):')
+        let novaDataNascimento = this.entrada.receberData('Digite a data de nascimento (ou pressione Enter para manter)')
         if (novaDataNascimento && !isNaN(novaDataNascimento.getTime())){
             cliente.setDataNascimento(novaDataNascimento)
         }
-
+        console.log('---------------------------------------------------');
         console.log('| Escolha uma opção abaixo:')
         console.log('| 1 - Adicionar Documento')
         console.log('| 2 - Adicionar Telefone (Opção apenas para titular)')
@@ -50,6 +54,7 @@ export default class EditarCliente extends Processo{
         console.log('| 4 - Editar Telefone (Opção apenas para titular)')
         console.log('| 5 - Editar Documeto')
         console.log('| 6 - Finalizar Atualização')
+        console.log('---------------------------------------------------');
         
         let opcao = this.entrada.receberNumero('Digite a opção que deseja:')
 
@@ -70,12 +75,14 @@ export default class EditarCliente extends Processo{
                 this.editarDocumetos(cliente);
                 break;
             case 6:
-                console.log('Atualização finalizada com sucesso!');
                 break;
             default:
                 console.log('Opção inválida! Tente novamente.');
                 break;
         }
+        console.log('---------------------------------------------------');
+        console.log('               CLIENTE ATUALIZADO');
+        console.log('---------------------------------------------------');
     }
     private adicionarDocumetos(cliente: Cliente){
         this.processo = new CadastrarDocumentosCliente(cliente)

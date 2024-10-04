@@ -1,16 +1,14 @@
 import Processo from "../../abstracoes/processo"
 import Armazem from "../../dominio/armazem"
-import ImpressorDocumentos from "../../impressores/impressorDocumentos"
 import Cliente from "../../modelos/cliente"
 import Telefone from "../../modelos/telefone"
+import AtualizaTelefoneDependentes from "../../utils/atualizaTelefonesDependentes"
 import EncontraCliente from "../../utils/encontraCliente"
-import ExisteDocumento from "../../utils/existeDocumento"
 import ExisteTelefone from "../../utils/existeTelefone"
 
 
 export default class ExcluirTelefone extends Processo {
     private armazem: Armazem
-    private impressor!: ImpressorDocumentos
 
     constructor() {
         super()
@@ -18,9 +16,9 @@ export default class ExcluirTelefone extends Processo {
     }
 
     processar(): void {
-        console.log('----------------------------------------')
-        console.log('   Iniciando Exclusão de Telefone:')
-        console.log('----------------------------------------')
+        console.log('---------------------------------------------------');
+        console.log('          INICIANDO EXCLUSÃO DE TELEFONE');
+        console.log('---------------------------------------------------');
 
         const numeroDocumento = this.entrada.receberTexto('Digite o número do documento do cliente:').trim()
         const cliente = EncontraCliente(this.armazem.Clientes, numeroDocumento)
@@ -60,16 +58,11 @@ export default class ExcluirTelefone extends Processo {
         
         cliente.Telefones.splice(indice, 1)
         if(cliente.Dependentes.length > 0){
-            this.atualizaTelefoneDependentes(cliente.Dependentes,cliente)
+            AtualizaTelefoneDependentes(cliente.Dependentes,cliente)
         }
         
-        console.log('----------------------------------------')
-        console.log('           Telefone Excluído')
-        console.log('----------------------------------------')
-    }
-    private atualizaTelefoneDependentes(dependentes: Cliente[], titular: Cliente) {
-        for (const dependente of dependentes) {
-            dependente.setTelefones(titular.Telefones.map(tel => tel.clonar() as Telefone))
-        }
+        console.log('---------------------------------------------------');
+        console.log('               TELEFONE EXCLUÍDO');
+        console.log('---------------------------------------------------');
     }
 }

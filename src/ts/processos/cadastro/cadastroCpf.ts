@@ -20,7 +20,7 @@ export default class CadastroCpf extends Processo {
             console.log('Documento já registrado')
             return
         }
-        let dataExpedicao = this.entrada.receberData('Qual a data de expedição do documento?')
+        let dataExpedicao = this.entrada.receberData('Qual a data de expedição do documento')
         let cpf = new Documento(numero, TipoDocumento.CPF, dataExpedicao)
         this.cliente.Documentos.push(cpf)
     }

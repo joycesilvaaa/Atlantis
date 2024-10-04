@@ -3,20 +3,21 @@ import Cliente from "../../modelos/cliente";
 import Armazem from "../../dominio/armazem";
 import ExisteDocumento from "../../utils/existeDocumento";
 import ImpressorDocumentos from "../../impressores/impressorDocumentos";
+import Impressor from "../../interfaces/impressor";
 
 export default class EditarDocumento extends Processo{
     private cliente : Cliente
     private armazem: Armazem
-    private impressor!: ImpressorDocumentos
+    private impressor!: Impressor
     constructor(cliente: Cliente){
         super()
         this.cliente = cliente
         this.armazem = Armazem.InstanciaUnica
     }
     processar(): void {
-        console.log('-------------------------------------------')
-        console.log('       Inciando Atualização Documento...')
-        console.log('-------------------------------------------')
+        console.log('---------------------------------------------------');
+        console.log('          INICIANDO EDIÇÃO DE DOCUMENTOS');
+        console.log('---------------------------------------------------');
         let documentosAtuais = this.cliente.Documentos
         if (documentosAtuais.length === 0) {
             console.log('Necessário realizar o cadastro de um novo documento antes de editá-lo.');
@@ -44,13 +45,13 @@ export default class EditarDocumento extends Processo{
                 documentoAtual.setNumero(novoNumero)
             }
 
-            let dataExpedicao = this.entrada.receberData('Digite a nova data de expedição do documento (ou pressione Enter para manter):')
+            let dataExpedicao = this.entrada.receberData('Digite a nova data de expedição do documento (ou pressione Enter para manter)')
             if(dataExpedicao && !isNaN(dataExpedicao.getTime())){
                 documentoAtual.setDataExpedicao(dataExpedicao)
             }
-            console.log('-------------------------------------------')
-            console.log('           Documento Atualizado :)')
-            console.log('-------------------------------------------')
+            console.log('---------------------------------------------------');
+            console.log('               DOCUMENTO ATUALIZADO');
+            console.log('---------------------------------------------------');
 
             let continuar = this.entrada.receberTexto('Deseja atualizar mais algum documento? (S/N)').toLowerCase().trim()
             if(continuar === 'n'){

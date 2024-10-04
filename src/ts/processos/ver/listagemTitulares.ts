@@ -14,7 +14,7 @@ export default class ListagemTitulares extends Processo {
     processar(): void {
         console.clear()
         console.log('---------------------------------------------------')
-        console.log('        Listagem dos clientes titulares')
+        console.log('               CLIENTES TITULARES')
         console.log('---------------------------------------------------')
         this.clientes.forEach(cliente => {
             if (this.titular(cliente)) {

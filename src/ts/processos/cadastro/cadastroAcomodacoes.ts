@@ -1,7 +1,12 @@
-import Processo from "../../../../atviii-atlantis/src/ts/abstracoes/processo";
+import Processo from "../../abstracoes/processo";
+import DiretorCasalSimples from "../../diretores/diretorCasalSimples";
+import DiretorFamiliaMais from "../../diretores/diretorFamiliaMais";
+import DiretorFamiliaSimples from "../../diretores/diretorFamiliaSimples";
+import DiretorFamiliaSuper from "../../diretores/diretorFamiliaSuper";
+import DiretorSolteiroMais from "../../diretores/diretorSolteiroMais";
 import DiretorSolteiroSimples from "../../diretores/diretorSolteiroSimples";
-import Armazem from "../../../../atviii-atlantis/src/ts/dominio/armazem";
-import Acomodacao from "../modelos/acomodacao";
+import Armazem from "../../dominio/armazem";
+import Acomodacao from "../../modelos/acomodacao";
 
 export default class CadastroAcomodacoes extends Processo {
     private acomodacoes: Acomodacao[]
@@ -10,7 +15,22 @@ export default class CadastroAcomodacoes extends Processo {
         this.acomodacoes = Armazem.InstanciaUnica.Acomodacoes
     }
     processar(): void {
-        let diretor = new DiretorSolteiroSimples()
+        let diretor = new DiretorCasalSimples()
+        this.acomodacoes.push(diretor.construir())
+
+        diretor = new DiretorFamiliaSimples()
+        this.acomodacoes.push(diretor.construir())
+
+        diretor = new DiretorFamiliaMais()
+        this.acomodacoes.push(diretor.construir())
+
+        diretor = new DiretorFamiliaSuper()
+        this.acomodacoes.push(diretor.construir())
+
+        diretor = new DiretorSolteiroSimples()
+        this.acomodacoes.push(diretor.construir())
+
+        diretor = new DiretorSolteiroMais()
         this.acomodacoes.push(diretor.construir())
     }
 }

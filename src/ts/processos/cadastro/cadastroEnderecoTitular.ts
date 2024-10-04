@@ -11,7 +11,9 @@ export default class CadastroEnderecoTitular extends Processo {
     }
 
     processar(): void {
-        console.log('Coletando os dados de endereço...')
+        console.log('---------------------------------------------------');
+        console.log('         COLETANDO OS DADOS DE ENDEREÇO...');
+        console.log('---------------------------------------------------');
         let rua = this.entrada.receberTexto('Qual a rua?').trim()
         let bairro = this.entrada.receberTexto('Qual o bairro?').trim()
         let cidade = this.entrada.receberTexto('Qual a cidade?').trim()

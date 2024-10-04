@@ -9,7 +9,9 @@ import CadastrarDocumentosCliente from "../tipos/cadastrarDocumentosCliente"
 
 export default class CadastroClienteDependente extends Processo {
     processar(): void {
-        console.log('Iniciando o cadastro de um novo Dependente...')
+        console.log('---------------------------------------------------');
+        console.log('   INICIANDO O CADASTRO DE UM NOVO DEPENDENTE');
+        console.log('---------------------------------------------------');
         let documentoTitular = this.entrada.receberTexto('Digite o numero de documento do Titular: ')
         let armazem = Armazem.InstanciaUnica
         const titular = EncontraCliente(armazem.Clientes, documentoTitular)
@@ -22,7 +24,7 @@ export default class CadastroClienteDependente extends Processo {
         while (true){
             let nome = this.entrada.receberTexto('Qual o nome do novo dependente?')
             let nomeSocial = this.entrada.receberTexto('Qual o nome social do novo denpente?')
-            let dataNascimento = this.entrada.receberData('Qual a data de nascimento?')
+            let dataNascimento = this.entrada.receberData('Qual a data de nascimento')
             let dependente = new Cliente(nome, nomeSocial, dataNascimento)
 
             dependente.setEndereco(titular.Endereco.clonar() as Endereco)
@@ -41,6 +43,8 @@ export default class CadastroClienteDependente extends Processo {
                 break
             }
         }
-        console.log('Finalizando o cadastro do dependente...')
+        console.log('---------------------------------------------------');
+        console.log('               FINALIZANDO CADASTRO');
+        console.log('---------------------------------------------------');
     }
 }

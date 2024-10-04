@@ -13,12 +13,16 @@ export default class ListagemAcomodacoes extends Processo {
     }
     processar(): void {
         console.clear()
-        console.log('Iniciando a listagem das acomodações ofertadas...')
+        console.log(`-------------------------------------------------`)
+        console.log('           ACOMODAÇÕES OFERTADAS')
         console.log(`-------------------------------------------------`)
         this.acomodacoes.forEach(acomodacao => {
             this.impressor = new ImpressorAcomodacao(acomodacao)
             console.log(this.impressor.imprimir())
             console.log(`-------------------------------------------------`)
         })
+        console.log(`-------------------------------------------------`)
+        console.log('               FIM DA LISTAGEM')
+        console.log(`-------------------------------------------------`)
     }
 }

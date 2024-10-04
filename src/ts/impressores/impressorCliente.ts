@@ -13,7 +13,7 @@ export default class ImpressorCliente implements Impressor {
 
     }
     imprimir(): string {
-        let impressao = `****************************\n`
+        let impressao = `=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n`
             + `| Nome: ${this.cliente.Nome}\n`
             + `| Nome social: ${this.cliente.NomeSocial}\n`
             + `| Data de nascimento: ${this.cliente.DataNascimento.toLocaleDateString()}\n`
@@ -28,7 +28,7 @@ export default class ImpressorCliente implements Impressor {
         this.impressor = new ImpressorTelefones(this.cliente.Telefones)
         impressao = impressao + `\n${this.impressor.imprimir()}`
 
-        impressao = impressao + `\n****************************`
+        impressao = impressao + `\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=`
         return impressao
     }
 

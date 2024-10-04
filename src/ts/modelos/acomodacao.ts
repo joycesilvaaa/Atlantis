@@ -1,4 +1,4 @@
-import { NomeAcomadacao } from "../../../../src/ts/enumeracoes/NomeAcomadacao"
+import { NomeAcomadacao } from "../enumeracoes/NomeAcomadacao"
 
 export default class Acomodacao {
     private nomeAcomadacao: NomeAcomadacao

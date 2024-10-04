@@ -1,13 +1,12 @@
 import Processo from "../../abstracoes/processo"
 import Armazem from "../../dominio/armazem"
-import ImpressorDocumentos from "../../impressores/impressorDocumentos"
+import Impressor from "../../interfaces/impressor"
 import EncontraCliente from "../../utils/encontraCliente"
 import ExisteDocumento from "../../utils/existeDocumento"
 
 
 export default class ExcluirDocumento extends Processo {
     private armazem: Armazem
-    private impressor!: ImpressorDocumentos
 
     constructor() {
         super()
@@ -15,9 +14,9 @@ export default class ExcluirDocumento extends Processo {
     }
 
     processar(): void {
-        console.log('----------------------------------------')
-        console.log('   Iniciando Exclusão de Documento:')
-        console.log('----------------------------------------')
+        console.log('---------------------------------------------------');
+        console.log('           INICIANDO EXCLUSÃO DE DOCUMENTO');
+        console.log('---------------------------------------------------');
 
         const numeroDocumento = this.entrada.receberTexto('Digite o número do documento do cliente:').trim()
         const cliente = EncontraCliente(this.armazem.Clientes, numeroDocumento)
@@ -56,8 +55,8 @@ export default class ExcluirDocumento extends Processo {
         
         cliente.Documentos.splice(indice, 1)
         
-        console.log('----------------------------------------')
-        console.log('           Documento Excluído')
-        console.log('----------------------------------------')
+        console.log('---------------------------------------------------');
+        console.log('                  DOCUMENTO EXCLUÍDO');
+        console.log('---------------------------------------------------');
     }
 }
