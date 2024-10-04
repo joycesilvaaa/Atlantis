@@ -6,6 +6,9 @@ import Cliente from "../modelos/cliente";
 import Documento from "../modelos/documento";
 import Endereco from "../modelos/endereco";
 import Telefone from "../modelos/telefone";
+import CadastroAcomodacoes from "../processos/cadastro/cadastroAcomodacoes";
+import Hospedagem from "../modelos/hospedagem";
+import { NomeAcomadacao } from "../enumeracoes/NomeAcomadacao";
 
 console.clear();
 console.log(`Bem-vindo(a) ao melhor sistema de gestão de clubes, hotéis e resorts do mundo, o Atlantis :)`);
@@ -14,6 +17,10 @@ let processo: Processo;
 let execucao: Boolean = true;
 
 let armazem = Armazem.InstanciaUnica;
+
+// Cria acomodação
+let acomodacao = new CadastroAcomodacoes()
+acomodacao.processar()
 
 // Cliente 1 com Dependente
 let cliente1 = new Cliente("Ana Silva", "Ana", new Date(1985, 4, 15));
@@ -67,6 +74,13 @@ armazem.Clientes.push(dependente1);
 
 armazem.Clientes.push(cliente2);
 armazem.Clientes.push(dependente2);
+
+
+// criando hospedagem teste
+const hospedagem1 = new Hospedagem(NomeAcomadacao.CasalSimples, cliente1,new Date(2024, 11-1, 1), new Date(2024, 11-1, 6))
+armazem.Hospedagem.push(hospedagem1)
+const hospedagem2 = new Hospedagem(NomeAcomadacao.SolteiroMais, cliente2,new Date(2024, 10-1, 20), new Date(2024, 10-1, 26))
+armazem.Hospedagem.push(hospedagem2)
 
 while (execucao) {
     processo = new Principal();
