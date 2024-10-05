@@ -1,13 +1,12 @@
-import { BarChart } from '@mui/x-charts/BarChart';
+
 import { LayoutBaseDePagina } from "../../shared/layouts";
-import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import { Box, useTheme, useMediaQuery, Divider } from "@mui/material";
 import { GraficoBarra, GraficoPizza } from '../../shared/components';
 
 
 export function Dashboard() {
     const theme = useTheme();
     const smDown = useMediaQuery(theme.breakpoints.down("sm"));
-
 
     const data = [
         { month: 'Jan', total: 50 },
@@ -37,15 +36,16 @@ export function Dashboard() {
         { id: 4, value: 5, label: 'Solteiro Mais' },
         { id: 5, value: 9, label: 'Solteiro Simples' },
     ]
-
+    
     return (
         <LayoutBaseDePagina title="Dashboard">
+            <Divider/>
             <Box 
                 display="flex" 
                 flexDirection={smDown ? 'column' : 'row'}
                 justifyContent="space-around" 
                 alignItems={smDown ? 'center' : 'flex-start'} 
-                padding={smDown ? 0 : 9}
+                padding={smDown ? 0 : 2}
             >
                 
                <GraficoPizza data={clientData} title='Novos Clientes no Mês' />

@@ -31,11 +31,11 @@ export function LayoutBaseDePagina({children,title,}: ILayoutBaseDePaginaPros) {
         padding={1}
         display="flex"
         alignItems="center"
-        gap={1}
-        height={theme.spacing(smDown? 6: mdDown? 8: 12)}
+        margin={3}
+        height={theme.spacing(smDown? 6: mdDown? 3: 5)}
       >
         <Typography 
-            variant={smDown? 'h4': mdDown ? 'h3': 'h2'} 
+            variant='h3' 
             whiteSpace="nowrap" 
             overflow="hidden" 
             textOverflow="ellipsis"

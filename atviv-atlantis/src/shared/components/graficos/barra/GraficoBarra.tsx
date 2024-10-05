@@ -14,6 +14,7 @@ interface IGraficoBarraProps {
 export function GraficoBarra({ data, title }: IGraficoBarraProps) {
     const theme = useTheme();
     const smDown = useMediaQuery(theme.breakpoints.down("sm"));
+    const mdDown = useMediaQuery(theme.breakpoints.down("md"));
 
     const formattedData = data.map(item => ({
         month: item.month,
@@ -21,7 +22,7 @@ export function GraficoBarra({ data, title }: IGraficoBarraProps) {
     }));
 
     return (
-        <Box padding={smDown ? 0 : 2} margin={smDown ? 0 : 2} display="flex" flexDirection="column" alignItems="center">
+        <Box padding={smDown ? 0 : 4} margin={smDown ? 0 : 2} display="flex" flexDirection="column" alignItems="center">
             <Typography variant='h5' gutterBottom textAlign="center" width="100%">
                 {title}
             </Typography>

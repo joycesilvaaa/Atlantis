@@ -21,8 +21,6 @@ export function GraficoPizza({ data, title }: IGraficoPizzaProps) {
             display="flex"
             flexDirection="column"
             alignItems="center"
-            padding={smDown ? 0 : 2}
-            margin={smDown ? 0 : 2}
         >
             <Typography
                 variant="h5"
@@ -32,16 +30,16 @@ export function GraficoPizza({ data, title }: IGraficoPizzaProps) {
             >
                 {title}
             </Typography>
-            <PieChart
+            <Box width={theme.spacing(60)} height={theme.spacing(25)}>
+                 <PieChart
                 series={[{ data }]}
-                width={smDown ? 200 : 500}
-                height={smDown ? 200 : 200}
                 slotProps={{
                     legend: {
                         hidden: smDown
                     },
                 }}
             />
+            </Box>
         </Box>
     );
 }
