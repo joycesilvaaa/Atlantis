@@ -43,7 +43,6 @@ export function LayoutBaseDePagina({children,title,}: ILayoutBaseDePaginaPros) {
           {title}
         </Typography>
       </Box>
-      <Box>barra de ferramentas</Box>
       <Box flex={1} overflow="auto">
         {children}
         </Box>

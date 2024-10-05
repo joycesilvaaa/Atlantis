@@ -26,5 +26,10 @@ export const DarkTheme = createTheme({
     action: {
       active: '#B3B3B3', // Ícones brancos
     },
+  },
+  typography:{
+    allVariants:{
+      color: '#B3B3B3'
+    }
   }
 });
