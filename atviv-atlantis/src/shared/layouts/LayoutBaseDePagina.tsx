@@ -1,6 +1,7 @@
 import { MenuSharp } from "@mui/icons-material";
 import {
   Box,
+  Divider,
   IconButton,
   Typography,
   useMediaQuery,
@@ -44,6 +45,7 @@ export function LayoutBaseDePagina({children,title,}: ILayoutBaseDePaginaPros) {
         </Typography>
       </Box>
       <Box flex={1} overflow="auto">
+        <Divider/>
         {children}
         </Box>
     </Box>

@@ -28,7 +28,7 @@ export function MenuLateral({ children }: { children: ReactNode }) {
       text: "Cadastro",
       icon: <Person />,
       action: () => {
-        navigate('');
+        navigate("/cadastro-cliente");
         toggleDrawerOpen(); 
       }
     },
