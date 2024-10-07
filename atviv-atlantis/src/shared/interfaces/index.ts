@@ -1,0 +1,5 @@
+export * from './ICliente'
+export * from './IEndereco'
+export * from './IDocumento'
+export * from './ITelefone'
+export * from './IDependente'

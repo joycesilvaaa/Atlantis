@@ -10,19 +10,17 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateField } from "@mui/x-date-pickers/DateField";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Seletor } from "../seletor/Seletor";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
+import { ICliente, IEndereco } from "../../interfaces";
 
 interface ITelefone {
   id: number;
   ddd: string;
   numero: string;
 }
+
 interface IDocumento {
   id: number;
   tipo: string;
@@ -30,10 +28,22 @@ interface IDocumento {
   dataExpedicao: Dayjs | null;
 }
 
-export function FormularioCliente() {
-  const theme = useTheme();
-  const smDown = useMediaQuery(theme.breakpoints.down("sm"));
-  const [tipoCliente, setTipoCliente] = useState<string | number>("");
+interface FormularioClienteProps {
+  onSaveCliente: (cliente: ICliente) => void;
+  clienteEditavel?: ICliente; // Adicionado para suportar edição
+}
+
+export function FormularioCliente({ onSaveCliente, clienteEditavel }: FormularioClienteProps) {
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [dataNascimento, setDataNascimento] = useState<Dayjs | null>(null);
+  const [endereco, setEndereco] = useState<IEndereco>({
+    rua: "",
+    numero: "",
+    cep: "",
+    cidade: "",
+    estado: "",
+  });
   const [documentos, setDocumentos] = useState<IDocumento[]>([
     { id: 0, tipo: "", numero: "", dataExpedicao: null },
   ]);
@@ -41,19 +51,79 @@ export function FormularioCliente() {
     { id: 0, ddd: "", numero: "" },
   ]);
 
-  const clienteOptions = [
-    { value: 0, label: "Titular" },
-    { value: 1, label: "Dependente" },
-  ];
-
+  const theme = useTheme();
+  const smDown = useMediaQuery(theme.breakpoints.down("sm"));
   const tiposDocumentos = [
     { value: "CPF", label: "Cadastro de Pessoas Física" },
     { value: "RG", label: "Registro Geral" },
     { value: "Passaporte", label: "Passaporte" },
   ];
 
-  function handleTipoClienteValue(e: SelectChangeEvent<string | number>) {
-    setTipoCliente(e.target.value);
+
+  useEffect(() => {
+    if (clienteEditavel) {
+      setNome(clienteEditavel.nome);
+      setEmail(clienteEditavel.email);
+      setDataNascimento(clienteEditavel.dataNascimento);
+      setEndereco(clienteEditavel.endereco);
+      setDocumentos(clienteEditavel.documentos.map((doc, index) => ({
+        id: index, 
+        tipo: doc.tipo,
+        numero: doc.numero,
+        dataExpedicao: doc.dataExpedicao,
+      })));
+      setTelefones(clienteEditavel.telefones.map((tel, index) => ({
+        id: index, 
+        ddd: tel.ddd,
+        numero: tel.numero,
+      })));
+    }
+  }, [clienteEditavel]);
+
+  function handleSubmit() {
+    const cliente: ICliente = {
+      nome: nome,
+      email: email,
+      dataNascimento: dataNascimento as Dayjs,
+      documentos: documentos.map((documento) => ({
+        tipo: documento.tipo,
+        numero: documento.numero,
+        dataExpedicao: documento.dataExpedicao as Dayjs,
+      })),
+      telefones: telefones.map((telefone) => ({
+        ddd: telefone.ddd,
+        numero: telefone.numero,
+      })),
+      endereco: {
+        rua: endereco.rua,
+        numero: endereco.numero,
+        cep: endereco.cep,
+        cidade: endereco.cidade,
+        estado: endereco.estado,
+      },
+      titular: false,
+    };
+
+    onSaveCliente(cliente);
+  }
+
+  function handleNomeChange(value: string){
+    setNome(value)
+  }
+
+  function handleEmailChange(value:string){
+    setEmail(value)
+  }
+
+  function handleDataNascimento(data: any){
+    setDataNascimento(data)
+  }
+  
+  function handleEnderecoChange(filter: keyof IEndereco, value: string) {
+    setEndereco((prevEndereco) => ({
+      ...prevEndereco,
+      [filter]: value,
+    }));
   }
 
   function handleDocumentoChange(
@@ -84,6 +154,7 @@ export function FormularioCliente() {
     );
     setTelefones(updatedTelefones);
   }
+
   function addDocumento() {
     setDocumentos([
       ...documentos,
@@ -97,24 +168,20 @@ export function FormularioCliente() {
     );
     setDocumentos(newDocumentos);
   }
+  
   return (
-    <Box margin={5} display={"flex"} flexDirection={"column"} gap={1}>
+    <Box margin={5} display={"flex"} flexDirection={"column"} gap={2}>
       <Box display={"flex"} flexDirection={"column"} gap={1}>
         <Typography variant="h5">Informações do Cliente</Typography>
-        <Box display={"flex"} flexDirection={"column"} gap={1}>
-          <Seletor
-            title="Tipo de Cliente"
-            value={tipoCliente}
-            options={clienteOptions}
-            handleChangeValue={handleTipoClienteValue}
-          />
-
+        <Box display={"flex"} flexDirection={"column"} gap={2}>
           <TextField
             id="outlined-basic"
             label="Nome"
             placeholder="Digite seu nome"
             multiline
             fullWidth
+            value={nome}
+            onChange={(e)=> handleNomeChange(e.target.value)}
           />
 
           <TextField
@@ -123,6 +190,8 @@ export function FormularioCliente() {
             placeholder="Digite seu e-mail"
             multiline
             fullWidth
+            value={email}
+            onChange={(e)=> handleEmailChange(e.target.value)}
           />
 
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -131,15 +200,17 @@ export function FormularioCliente() {
                 label="Data de Nascimento"
                 format="DD/MM/YYYY"
                 fullWidth
+                value={dataNascimento}
+                onChange={(e)=> handleDataNascimento(e)}
               />
             </DemoContainer>
           </LocalizationProvider>
         </Box>
       </Box>
-      <Box height="100%" display="flex" flexDirection="column" gap={1}>
+      <Box height="100%" display="flex" flexDirection="column" gap={2}>
         <Typography variant="h5">Documentos</Typography>
         {documentos.map((documento, index) => (
-          <Box key={index} display="flex" flexDirection="column" gap={1}>
+          <Box key={index} display="flex" flexDirection="column" gap={2}>
             <Seletor
               title="Tipo de Documento"
               options={tiposDocumentos}
@@ -187,7 +258,7 @@ export function FormularioCliente() {
           Adicionar Documento
         </Button>
       </Box>
-      <Box height="100%" display="flex" flexDirection="column" gap={1}>
+      <Box height="100%" display="flex" flexDirection="column" gap={2}>
         <Typography variant="h5">Telefone</Typography>
         {telefones.map((telefone, index) => (
           <Box
@@ -230,15 +301,17 @@ export function FormularioCliente() {
           Adicionar Telefone
         </Button>
       </Box>
-      <Box height="100%" display="flex" flexDirection="column" gap={1}>
+      <Box height="100%" display="flex" flexDirection="column" gap={2}>
         <Typography variant="h5">Endereço</Typography>
-        <Box display="flex" flexDirection={smDown ? "column" : "row"} gap={1}>
+        <Box display="flex" flexDirection={smDown ? "column" : "row"} gap={2}>
           <TextField
             id="outlined-basic"
             label="CEP"
             placeholder="Digite a cep do seu endereço"
             multiline
             fullWidth
+            value={endereco?.cep}
+            onChange={(e) => handleEnderecoChange('cep', e.target.value)}
           />
           <TextField
             id="outlined-basic"
@@ -248,13 +321,15 @@ export function FormularioCliente() {
             fullWidth
           />
         </Box>
-        <Box display="flex" flexDirection={smDown ? "column" : "row"} gap={1}>
+        <Box display="flex" flexDirection={smDown ? "column" : "row"} gap={2}>
           <TextField
             id="outlined-basic"
             label="Rua"
             placeholder="Digite a rua do seu endereço"
             multiline
             fullWidth
+            value={endereco?.rua}
+            onChange={(e) => handleEnderecoChange('rua', e.target.value)}
           />
 
           <TextField
@@ -263,6 +338,8 @@ export function FormularioCliente() {
             placeholder="Digite o estado do seu endereço"
             multiline
             fullWidth
+            value={endereco?.estado}
+            onChange={(e) => handleEnderecoChange('estado', e.target.value)}
           />
 
           <TextField
@@ -271,10 +348,12 @@ export function FormularioCliente() {
             placeholder="Digite a numero do seu endereço"
             multiline
             fullWidth
+            value={endereco?.numero}
+            onChange={(e) => handleEnderecoChange('numero', e.target.value)}
           />
         </Box>
       </Box>
-      <Button variant="outlined" color="secondary" >
+      <Button variant="outlined" color="secondary" onClick={handleSubmit} >
           Salvar Cliente
         </Button>
     </Box>
