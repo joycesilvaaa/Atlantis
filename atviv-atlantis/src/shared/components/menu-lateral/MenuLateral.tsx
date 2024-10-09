@@ -115,7 +115,7 @@ export function MenuLateral({ children }: { children: ReactNode }) {
       text: "Listagem",
       icon: <ListAlt />,
       action: () => {
-        navigate("");
+        navigate("/listagem-hospedagem");
         toggleDrawerOpen();
       },
     },

@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom"
-import { CadastroHospedagem, Dashboard, EditarCliente, ExcluirCliente, ListagemCliente, VerCliente, VerHospedagem } from "../pages"
+import { CadastroHospedagem, Dashboard, EditarCliente, ExcluirCliente, ListagemCliente, ListagemHospedagem, VerCliente, VerHospedagem } from "../pages"
 import { CadastroCliente } from "../pages"
 import { EditarHospedagem } from "../pages"
-import { ExcluirHospegadem } from "../pages/excluir-hospedagem/ExcluirHospedagem"
+import { ExcluirHospegadem } from "../pages"
 
 function AppRoutes(){
     return (
@@ -17,6 +17,7 @@ function AppRoutes(){
             <Route path="/editar-hospedagem" element={<EditarHospedagem/>}/>
             <Route path="/ver-hospedagem" element={<VerHospedagem/>}/>
             <Route path="/excluir-hospedagem" element={<ExcluirHospegadem/>}/>
+            <Route path="/listagem-hospedagem" element={<ListagemHospedagem/>}/>
             <Route path="*" element={<Navigate to="/pagina-inicial"/>}/>
         </Routes>
     )

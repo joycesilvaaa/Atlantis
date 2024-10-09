@@ -102,10 +102,10 @@ export function ListagemCliente() {
   ];
 
   return (
-    <LayoutBaseDePagina title="Novo Usuario">
+    <LayoutBaseDePagina title="Listagem">
       <Box margin={3}>
         <Seletor
-          title="Tipo de Cliente"
+          title="Tipo de Listagem"
           value={tipoListagem}
           options={listagemOptions}
           handleChangeValue={handleTipoClienteValue}
