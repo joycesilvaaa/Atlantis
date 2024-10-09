@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import dayjs from "dayjs";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ICliente } from "../../interfaces";
 
 

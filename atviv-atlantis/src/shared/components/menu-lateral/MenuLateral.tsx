@@ -91,7 +91,7 @@ export function MenuLateral({ children }: { children: ReactNode }) {
       text: "Edição",
       icon: <BorderColor />,
       action: () => {
-        navigate("");
+        navigate("/editar-hospedagem");
         toggleDrawerOpen();
       },
     },

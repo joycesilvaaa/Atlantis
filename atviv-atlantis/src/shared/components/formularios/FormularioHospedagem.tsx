@@ -94,7 +94,7 @@ export function FormularioHospedagem({
       </Box>
       <Box display={"flex"} justifyContent={"center"}>
         <Button variant="outlined" color="secondary" onClick={handleSubmit}>
-          Cadastrar Hospedagem
+          Salvar
         </Button>
       </Box>
     </Box>

@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 import { CadastroHospedagem, Dashboard, EditarCliente, ExcluirCliente, ListagemCliente, VerCliente } from "../pages"
 import { CadastroCliente } from "../pages"
+import { EditarHospedagem } from "../pages/editar-hospedagem/EditarHospedagem"
 
 function AppRoutes(){
     return (
@@ -12,6 +13,7 @@ function AppRoutes(){
             <Route path="/excluir-cliente" element={<ExcluirCliente/>}/>
             <Route path="/listagem-clientes" element={<ListagemCliente/>}/>
             <Route path="/cadastro-hospedagem" element={<CadastroHospedagem/>}/>
+            <Route path="/editar-hospedagem" element={<EditarHospedagem/>}/>
             <Route path="*" element={<Navigate to="/pagina-inicial"/>}/>
         </Routes>
     )
