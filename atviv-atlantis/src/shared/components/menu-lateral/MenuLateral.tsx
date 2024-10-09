@@ -83,7 +83,7 @@ export function MenuLateral({ children }: { children: ReactNode }) {
       text: "Cadastro",
       icon: <Hotel />,
       action: () => {
-        navigate("");
+        navigate("/cadastro-hospedagem");
         toggleDrawerOpen();
       },
     },

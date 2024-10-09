@@ -12,7 +12,7 @@ import { Telefone } from "../../../interfaces";
 
 interface FormularioTelefonesProps {
   onChangeTelefones: (telefones: Telefone[]) => void;
-  telefonesIniciais?: Telefone[]; // Propriedade opcional para telefones iniciais
+  telefonesIniciais?: Telefone[];
 }
 
 export function FormularioTelefones({
@@ -24,7 +24,6 @@ export function FormularioTelefones({
   const smDown = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
-    // Atualiza os telefones quando os telefonesIniciais mudam
     setTelefones(telefonesIniciais);
   }, [telefonesIniciais]);
 

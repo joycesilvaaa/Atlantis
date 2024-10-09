@@ -30,7 +30,7 @@ interface IDocumento {
 
 interface FormularioClienteProps {
   onSaveCliente: (cliente: ICliente) => void;
-  clienteEditavel?: ICliente; // Adicionado para suportar edição
+  clienteEditavel?: ICliente;
 }
 
 export function FormularioCliente({ onSaveCliente, clienteEditavel }: FormularioClienteProps) {

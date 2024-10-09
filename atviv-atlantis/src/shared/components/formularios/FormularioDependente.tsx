@@ -10,20 +10,17 @@ import {
   import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
   import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
   import { DateField } from "@mui/x-date-pickers/DateField";
-  import InputLabel from "@mui/material/InputLabel";
-  import MenuItem from "@mui/material/MenuItem";
-  import FormControl from "@mui/material/FormControl";
-  import Select, { SelectChangeEvent } from "@mui/material/Select";
-  import { useState } from "react";
+  import { useEffect, useState } from "react";
   import { Seletor } from "../seletor/Seletor";
   import { Dayjs } from "dayjs";
 import { Documento, ICliente, IDependente } from "../../interfaces";
   
 interface FormularioDependenteProps{
     onSaveDependente: (dependete: IDependente)=> void
+    clienteEditavel?: ICliente;
 }
   
-  export function FormularioDependente({onSaveDependente}: FormularioDependenteProps) {
+  export function FormularioDependente({onSaveDependente, clienteEditavel}: FormularioDependenteProps) {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [dataNascimento, setDataNascimento] = useState<Dayjs | null>(null);
@@ -36,6 +33,20 @@ interface FormularioDependenteProps{
       { value: "RG", label: "Registro Geral" },
       { value: "Passaporte", label: "Passaporte" },
     ];
+
+    useEffect(() => {
+      if (clienteEditavel) {
+        setNome(clienteEditavel.nome);
+        setEmail(clienteEditavel.email);
+        setDataNascimento(clienteEditavel.dataNascimento);
+        setDocumentos(clienteEditavel.documentos.map((doc, index) => ({
+          id: index, 
+          tipo: doc.tipo,
+          numero: doc.numero,
+          dataExpedicao: doc.dataExpedicao,
+        })));
+      }
+    }, [clienteEditavel]);
 
     function handleSubmit() {
         const cliente: IDependente = {
