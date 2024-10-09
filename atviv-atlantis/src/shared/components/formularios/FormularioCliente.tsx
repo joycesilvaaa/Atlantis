@@ -201,7 +201,7 @@ export function FormularioCliente({ onSaveCliente, clienteEditavel }: Formulario
                 format="DD/MM/YYYY"
                 fullWidth
                 value={dataNascimento}
-                onChange={(e)=> handleDataNascimento(e)}
+                onChange={(newValue: Dayjs | null) => handleDataNascimento(newValue)}
               />
             </DemoContainer>
           </LocalizationProvider>
