@@ -107,7 +107,7 @@ export function MenuLateral({ children }: { children: ReactNode }) {
       text: "Exclusão",
       icon: <Delete />,
       action: () => {
-        navigate("");
+        navigate("/excluir-hospedagem");
         toggleDrawerOpen();
       },
     },

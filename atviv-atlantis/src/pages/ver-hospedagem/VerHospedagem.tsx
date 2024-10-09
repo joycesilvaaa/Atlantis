@@ -12,10 +12,10 @@ export function VerHospedagem() {
         setHospedagem(hospedagem)
     }
   return (
-    <LayoutBaseDePagina title="Ver Cliente">
+    <LayoutBaseDePagina title="Ver Hospedagem">
       <BuscaHospedagem onHospedagemChange={handleHospedagemChange} />
       <Box display={"flex"} justifyContent={"center"}>
-        {hospedagem && <VerDetalheHospedagem hospedagem={hospedagem}/>}
+        {hospedagem && hospedagem.cliente && <VerDetalheHospedagem hospedagem={hospedagem}/>}
       </Box>
     </LayoutBaseDePagina>
   );

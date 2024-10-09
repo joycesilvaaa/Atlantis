@@ -9,7 +9,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
 
 interface BuscaHospedagemProps{
-    onHospedagemChange: (hospedagem: IHospedagem) => void
+    onHospedagemChange: (hospedagem: IHospedagem| null) => void
 }
 
 export function BuscaHospedagem({ onHospedagemChange }: BuscaHospedagemProps) {
@@ -21,6 +21,12 @@ export function BuscaHospedagem({ onHospedagemChange }: BuscaHospedagemProps) {
   function handleClienteChange(cliente: ICliente | null) {
     console.log(cliente);
     setCliente(cliente);
+  }
+
+  function handleClickDate(){
+    setHospedagem(null)
+    onHospedagemChange(null)
+    
   }
 
   function handleSubmit() {
@@ -52,6 +58,8 @@ export function BuscaHospedagem({ onHospedagemChange }: BuscaHospedagemProps) {
         dataFinal: dataFinal,
       };
 
+      setHospedagem(novaHospedagem)
+
       onHospedagemChange(novaHospedagem);
     } else {
       console.log("Preencha todos os campos antes de cadastrar.");
@@ -70,6 +78,7 @@ export function BuscaHospedagem({ onHospedagemChange }: BuscaHospedagemProps) {
               format="DD/MM/YYYY"
               fullWidth
               value={dataInicial}
+              onClick={handleClickDate}
               onChange={(e: Dayjs | null) => setDataInicial(e)}
             />
           </DemoContainer>
@@ -81,15 +90,16 @@ export function BuscaHospedagem({ onHospedagemChange }: BuscaHospedagemProps) {
               format="DD/MM/YYYY"
               fullWidth
               value={dataFinal}
+              onClick={handleClickDate}
               onChange={(e: Dayjs | null) => setDataFinal(e)}
             />
           </DemoContainer>
         </LocalizationProvider>
       </Box>
       <Box display={"flex"} justifyContent={"center"}>
-        <Button variant="outlined" color="secondary" onClick={handleSubmit}>
+        {!hospedagem && <Button variant="outlined" color="secondary" onClick={handleSubmit}>
           Buscar Hospedagem
-        </Button>
+        </Button>}
       </Box>
       </>)}
     </Box>
