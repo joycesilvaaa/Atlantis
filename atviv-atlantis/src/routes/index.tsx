@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 import { CadastroHospedagem, Dashboard, EditarCliente, ExcluirCliente, ListagemCliente, VerCliente, VerHospedagem } from "../pages"
 import { CadastroCliente } from "../pages"
-import { EditarHospedagem } from "../pages/editar-hospedagem/EditarHospedagem"
+import { EditarHospedagem } from "../pages"
 
 function AppRoutes(){
     return (

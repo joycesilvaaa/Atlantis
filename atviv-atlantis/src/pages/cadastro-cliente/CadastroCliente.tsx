@@ -5,6 +5,7 @@ import { useState } from "react";
 import { FormularioDependente } from "../../shared/components/formularios/FormularioDependente";
 import { BuscaCliente } from "../../shared/components/busca/BuscaCliente";
 import { ICliente, IDependente } from "../../shared/interfaces";
+
 export function CadastroCliente() {
   const [tipoCliente, setTipoCliente] = useState<string | number>("");
   const [cliente, setCliente] = useState<ICliente | null>(null);

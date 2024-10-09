@@ -1,4 +1,3 @@
-
 import { LayoutBaseDePagina } from "../../shared/layouts";
 import { Box, useTheme, useMediaQuery, Divider } from "@mui/material";
 import { GraficoBarra, GraficoPizza } from '../../shared/components';

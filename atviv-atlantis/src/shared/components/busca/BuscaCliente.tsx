@@ -3,7 +3,6 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { ICliente } from "../../interfaces";
 
-
 interface BuscaClienteProps{
     onClientChange: (cliente: ICliente | null) => void
 }
