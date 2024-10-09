@@ -1,4 +1,4 @@
-import { Typography, Box, List, ListItem } from "@mui/material";
+import { Typography, Box, List, ListItem, Divider } from "@mui/material";
 import { ICliente } from "../../../shared/interfaces";
 
 interface ClienteProps {
@@ -7,8 +7,9 @@ interface ClienteProps {
 
 export function VerDetalheCliente({ cliente }: ClienteProps) {
   return (
-      <Box margin={3} padding={4} sx={{ border: "1px solid #ccc", borderRadius: "8px" }} >
+      <Box margin={2} padding={5} sx={{ border: "1px solid #ccc", borderRadius: "8px" }} >
         <Typography variant="h5">Detalhes do Cliente</Typography>
+        <Divider/>
         <Typography variant="subtitle1">Nome: {cliente.nome}</Typography>
         <Typography variant="subtitle1">Email: {cliente.email}</Typography>
         <Typography variant="subtitle1">

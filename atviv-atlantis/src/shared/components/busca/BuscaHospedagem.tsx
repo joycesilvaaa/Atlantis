@@ -6,7 +6,7 @@ import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { Box, Button} from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 interface BuscaHospedagemProps{
     onHospedagemChange: (hospedagem: IHospedagem) => void
@@ -26,6 +26,27 @@ export function BuscaHospedagem({ onHospedagemChange }: BuscaHospedagemProps) {
   function handleSubmit() {
     if (cliente && dataInicial && dataFinal) {
       const novaHospedagem: IHospedagem = {
+        cliente: {
+          nome: 'Joyce',
+          email: 'joyce@gmail.com',
+          dataNascimento: dayjs('1990-05-15'), 
+          documentos: [
+              { tipo: 'CPF', numero: '123.456.789-00', dataExpedicao: dayjs('2022-01-01') },
+              { tipo: 'RG', numero: '12.345.678-9', dataExpedicao: dayjs('2022-02-01') }
+          ],
+          telefones: [
+              {  ddd: '11', numero: '91234-5678' },
+              {  ddd: '11', numero: '98765-4321' }
+          ],
+          endereco: {
+              rua: 'Avenida Exemplo',
+              numero: '123',
+              cep: '01234-567',
+              cidade: 'São Paulo',
+              estado: 'SP'
+          },
+          titular: true
+      },
         tipoAcomodacao: "Solteiro Simples",
         dataInicial: dataInicial,
         dataFinal: dataFinal,

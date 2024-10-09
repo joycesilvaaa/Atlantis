@@ -18,7 +18,7 @@ export function VerCliente() {
   return (
     <LayoutBaseDePagina title="Ver Cliente">
       <BuscaCliente onClientChange={handleClienteChange} />
-      <Box width={"50%"}>
+      <Box display={"flex"} justifyContent={"center"}>
         {cliente && <VerDetalheCliente cliente={cliente}/>}
       </Box>
     </LayoutBaseDePagina>

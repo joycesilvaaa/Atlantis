@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom"
-import { CadastroHospedagem, Dashboard, EditarCliente, ExcluirCliente, ListagemCliente, VerCliente } from "../pages"
+import { CadastroHospedagem, Dashboard, EditarCliente, ExcluirCliente, ListagemCliente, VerCliente, VerHospedagem } from "../pages"
 import { CadastroCliente } from "../pages"
 import { EditarHospedagem } from "../pages/editar-hospedagem/EditarHospedagem"
 
@@ -14,6 +14,7 @@ function AppRoutes(){
             <Route path="/listagem-clientes" element={<ListagemCliente/>}/>
             <Route path="/cadastro-hospedagem" element={<CadastroHospedagem/>}/>
             <Route path="/editar-hospedagem" element={<EditarHospedagem/>}/>
+            <Route path="/ver-hospedagem" element={<VerHospedagem/>}/>
             <Route path="*" element={<Navigate to="/pagina-inicial"/>}/>
         </Routes>
     )

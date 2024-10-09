@@ -33,7 +33,7 @@ export function MenuLateral({ children }: { children: ReactNode }) {
   const smDown = useMediaQuery(theme.breakpoints.down("sm")); // informa quando o valor da tela ta menor
   const { isDrawerOpen, toggleDrawerOpen } = useDrawerContext();
   const navigate = useNavigate();
-  const { toggleTheme } = useAppThemeContext();
+  const { themeName, toggleTheme } = useAppThemeContext();
 
   const clientMenuItems = [
     {
@@ -99,7 +99,7 @@ export function MenuLateral({ children }: { children: ReactNode }) {
       text: "Ver Hospedagem",
       icon: <Description />,
       action: () => {
-        navigate("");
+        navigate("/ver-hospedagem");
         toggleDrawerOpen();
       },
     },
@@ -143,8 +143,8 @@ export function MenuLateral({ children }: { children: ReactNode }) {
           >
             <Box
               component="img"
-              sx={{ height: 12 * 8, width: 12 * 8 }}
-              src="/static/img/Atlantis.png"
+              sx={{ height: 30*2, width: 30 * 8 }}
+              src={themeName === 'dark' ? '/static/img/logoLight.png' : '/static/img/logoDark.png'}
               alt="Imagem"
             ></Box>
           </Box>
