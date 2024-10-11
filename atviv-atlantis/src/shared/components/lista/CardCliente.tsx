@@ -1,28 +1,30 @@
 import { Box, Button, Card, CardActions, CardContent, Typography } from "@mui/material";
 import { ICliente, IDocumento } from "../../interfaces";
-import { ModalCopiar } from "../modal/ModalCopiar";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface CardClienteProps {
   cliente: ICliente;
 }
 
 export function CardCliente({ cliente }: CardClienteProps) {
-  const [openModal, setOpenModal] = useState(false);
-  const [selectedDocumento, setSelectedDocumento] = useState<IDocumento|null>(null); 
+  const navigate = useNavigate()
 
-  function handleOpenModal(documento: IDocumento){
-    setSelectedDocumento(documento); 
-    setOpenModal(true); 
-  };
-
-  function handleCloseModal(){
-    setOpenModal(false);
-  };
+    function handleVerDetalhe(documento: any){
+      navigate(`/ver-cliente/${documento.numero}`)
+    }
 
   return (
     <Box display="flex" justifyContent="center" padding={1}>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card
+        sx={{
+          width: 300,  
+          height: 200, 
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",  
+        }}
+      >
         <CardContent>
           <Typography variant="h5" component="div">
             {cliente.nome}
@@ -40,17 +42,12 @@ export function CardCliente({ cliente }: CardClienteProps) {
         <CardActions>
           <Button
             size="small"
-            onClick={() => handleOpenModal(cliente.documentos[0])} 
+            onClick={() => handleVerDetalhe(cliente.documentos[0])} 
           >
             Ver detalhes
           </Button>
         </CardActions>
       </Card>
-      <ModalCopiar
-        documento={selectedDocumento as IDocumento}
-        open={openModal}
-        handleClose={handleCloseModal}
-      />
     </Box>
   );
 }

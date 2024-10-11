@@ -170,7 +170,7 @@ export function FormularioCliente({ onSaveCliente, clienteEditavel }: Formulario
   }
   
   return (
-    <Box margin={5} display={"flex"} flexDirection={"column"} gap={2}>
+    <Box margin={3} display={"flex"} flexDirection={"column"} gap={2}>
       <Box display={"flex"} flexDirection={"column"} gap={1}>
         <Typography variant="h5">Informações do Cliente</Typography>
         <Box display={"flex"} flexDirection={"column"} gap={2}>

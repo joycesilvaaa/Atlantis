@@ -19,6 +19,9 @@ export function ExcluirCliente() {
   return (
     <LayoutBaseDePagina title="Deletar Cliente">
       <BuscaCliente onClientChange={handleClienteChange} />
+      <Box>
+      {cliente && <VerDetalheCliente cliente={cliente} />}
+      </Box>
       <Box
         display={"flex"}
         flexDirection={"column"}
@@ -26,8 +29,6 @@ export function ExcluirCliente() {
         margin={4}
         gap={1}
       >
-        {cliente && <VerDetalheCliente cliente={cliente} />}
-
         {cliente && cliente.titular && (
           <Button variant="outlined" color="error" onClick={handleDeleteClient}>
             Deletar Cliente

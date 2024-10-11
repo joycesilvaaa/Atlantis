@@ -7,7 +7,7 @@ interface VerHospedagemProps{
 
 export function VerDetalheHospedagem({  hospedagem }: VerHospedagemProps){
     return(
-        <Box display={"flex"}  flexDirection={"column"} margin={3} padding={4} sx={{ border: "1px solid #ccc", borderRadius: "8px" }} >
+        <Box display={"flex"}  flexDirection={"column"} margin={2} padding={4} sx={{ border: "1px solid #ccc", borderRadius: "8px" }} >
             <Typography variant="h5">Hospedagem</Typography>
             <Divider/>
         <Typography variant="subtitle1">Nome: {hospedagem.cliente?.nome}</Typography>

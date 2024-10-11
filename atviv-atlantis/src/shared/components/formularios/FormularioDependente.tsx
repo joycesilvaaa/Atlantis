@@ -101,7 +101,7 @@ interface FormularioDependenteProps{
     }
     
     return (
-      <Box margin={5} display={"flex"} flexDirection={"column"} gap={1}>
+      <Box margin={3} display={"flex"} flexDirection={"column"} gap={1}>
         <Box display={"flex"} flexDirection={"column"} gap={1}>
           <Typography variant="h5">Informações do Cliente</Typography>
           <Box display={"flex"} flexDirection={"column"} gap={1}>

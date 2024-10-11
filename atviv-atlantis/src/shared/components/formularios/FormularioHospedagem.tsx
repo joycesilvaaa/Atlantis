@@ -61,7 +61,7 @@ export function FormularioHospedagem({
     },
   ];
   return (
-    <Box margin={5} display={"flex"} flexDirection={"column"} gap={2}>
+    <Box margin={3} display={"flex"} flexDirection={"column"} gap={2}>
       <Seletor
         title="Tipo de Acomodação"
         value={tipoAcomodacao}

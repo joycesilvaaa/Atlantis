@@ -7,7 +7,7 @@ interface ClienteProps {
 
 export function VerDetalheCliente({ cliente }: ClienteProps) {
   return (
-      <Box margin={2} padding={5} sx={{ border: "1px solid #ccc", borderRadius: "8px" }} >
+      <Box margin={3} padding={5} sx={{ border: "1px solid #ccc", borderRadius: "8px" }} >
         <Typography variant="h5">Detalhes do Cliente</Typography>
         <Divider/>
         <Typography variant="subtitle1">Nome: {cliente.nome}</Typography>
