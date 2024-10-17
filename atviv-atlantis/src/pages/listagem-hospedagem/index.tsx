@@ -1,35 +1,32 @@
-import { Box, Button, SelectChangeEvent } from "@mui/material";
-import {  Seletor } from "../../shared/components";
+import { Box, Button, SelectChangeEvent, Typography } from "@mui/material";
+import { Seletor } from "../../shared/components";
 import { LayoutBaseDePagina } from "../../shared/layouts";
 import { useState } from "react";
-import {
-  DateField,
-  DatePicker,
-  LocalizationProvider,
-} from "@mui/x-date-pickers";
-import { CardCliente } from "../../shared/components/lista/CardCliente";
-import { IAcomodacao, ICliente, IDocumento, IHospedagem, ITelefone } from "../../shared/interfaces";
-import dayjs, { Dayjs } from "dayjs";
-import { DataObject } from "@mui/icons-material";
-import { VerDetalheHospedagem } from "../../shared/components/lista/VerDetalheHospedagem";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { CardAcomodacao } from "../../shared/components/lista/CardAcomodacao";
+import { IAcomodacao, ICliente, IHospedagem } from "../../shared/interfaces";
+import dayjs, { Dayjs } from "dayjs";
+import { VerDetalheHospedagem } from "../../shared/components/lista/VerDetalheHospedagem";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-
+import { BuscaCliente } from "../../shared/components/busca/BuscaCliente";
 
 export function ListagemHospedagem() {
-  const [tipoListagem, setTipoListagem] = useState<string | number>("")
+  const [tipoListagem, setTipoListagem] = useState<string | number>("");
   const [dataInicial, setDataInicial] = useState<Dayjs | null>(null);
-  const [dataFinal, setDataFinal] = useState<Dayjs | null>(null)
-  const [hospedagem, setHospedagem] = useState<IHospedagem[]>([])
+  const [dataFinal, setDataFinal] = useState<Dayjs | null>(null);
+  const [hospedagem, setHospedagem] = useState<IHospedagem[]>([]);
+  const [cliente, setCliente] = useState<ICliente | null>(null);
+  const [buscaRealizada, setBuscaRealizada] = useState(false);
 
   function handleTipoHospedagemValue(e: SelectChangeEvent<string | number>) {
-    setDataInicial(null)
-    setDataFinal(null)
-    setHospedagem([])
-    setTipoListagem(e.target.value)
+    setDataInicial(null);
+    setDataFinal(null);
+    setHospedagem([]);
+    setTipoListagem(e.target.value);
+    setBuscaRealizada(false);
   }
 
-  function handleBusca(){
+  function handleBusca() {
     const hospedagens: IHospedagem[] = [
       {
         cliente: {
@@ -37,11 +34,11 @@ export function ListagemHospedagem() {
           email: "joao.silva@example.com",
           dataNascimento: dayjs("1990-05-15"),
           documentos: [
-            { 
-              tipo: "CPF", 
-              numero: "123.456.789-00", 
-              dataExpedicao: dayjs("2010-01-01") 
-            }
+            {
+              tipo: "CPF",
+              numero: "123.456.789-00",
+              dataExpedicao: dayjs("2010-01-01"),
+            },
           ],
           telefones: [{ ddd: "(11)", numero: "98765-4321" }],
           endereco: {
@@ -63,11 +60,11 @@ export function ListagemHospedagem() {
           email: "maria.souza@example.com",
           dataNascimento: dayjs("1985-08-20"),
           documentos: [
-            { 
-              tipo: "RG", 
-              numero: "987654321", 
-              dataExpedicao: dayjs("2005-06-10") 
-            }
+            {
+              tipo: "RG",
+              numero: "987654321",
+              dataExpedicao: dayjs("2005-06-10"),
+            },
           ],
           telefones: [{ ddd: "(21)", numero: "91234-5678" }],
           endereco: {
@@ -89,11 +86,11 @@ export function ListagemHospedagem() {
           email: "carlos.pereira@example.com",
           dataNascimento: dayjs("1975-11-30"),
           documentos: [
-            { 
-              tipo: "Passaporte", 
-              numero: "A12345678", 
-              dataExpedicao: dayjs("2018-03-15") 
-            }
+            {
+              tipo: "Passaporte",
+              numero: "A12345678",
+              dataExpedicao: dayjs("2018-03-15"),
+            },
           ],
           telefones: [{ ddd: "(31)", numero: "93456-7890" }],
           endereco: {
@@ -108,9 +105,15 @@ export function ListagemHospedagem() {
         tipoAcomodacao: "Suíte Presidencial",
         dataInicial: dayjs("2024-07-10"),
         dataFinal: dayjs("2024-07-15"),
-      }
+      },
     ];
-    setHospedagem(hospedagens)
+    setHospedagem(hospedagens);
+    setBuscaRealizada(true);
+  }
+
+  function handleClienteChange(cliente: ICliente | null) {
+    console.log(cliente);
+    setCliente(cliente);
   }
 
   const listagemOptions = [
@@ -118,8 +121,6 @@ export function ListagemHospedagem() {
     { value: 1, label: "Hospedagens por período" },
     { value: 2, label: "Hospedagens por cliente" },
   ];
-
-  
 
   const acomadacoes: IAcomodacao[] = [
     {
@@ -144,10 +145,10 @@ export function ListagemHospedagem() {
     },
     {
       tipo: "Familia Super",
-      descricao: "Acomodação para até duas famílias, casal e três crianças cada",
+      descricao:
+        "Acomodação para até duas famílias, casal e três crianças cada",
     },
-  ]
-    
+  ];
 
   return (
     <LayoutBaseDePagina title="Listagem">
@@ -159,47 +160,93 @@ export function ListagemHospedagem() {
           handleChangeValue={handleTipoHospedagemValue}
         />
       </Box>
-      <Box display={"flex"} flexDirection={"row"} flexWrap="wrap" justifyContent="center">
-      {tipoListagem === 0 && acomadacoes.map((acomodacao, index) => (
-          <CardAcomodacao key={index} acomodacao={acomodacao}/>
-        ))}
+      <Box
+        display={"flex"}
+        flexDirection={"row"}
+        flexWrap="wrap"
+        justifyContent="center"
+      >
+        {tipoListagem === 0 &&
+          acomadacoes.map((acomodacao, index) => (
+            <CardAcomodacao key={index} acomodacao={acomodacao} />
+          ))}
 
-      {tipoListagem === 1 && (
-        <>
-        <Box display={"flex"} flexDirection={'column'} width={"100%"} gap={2} marginLeft={3} marginRight={3}>
-         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
-              <DatePicker
-                label="Data Inicial"
-                format="DD/MM/YYYY"
-                value={dataInicial}
-                onChange={(newValue) => setDataInicial(newValue)}
-              />
-              <DatePicker
-                label="Data Final"
-                format="DD/MM/YYYY"
-                value={dataFinal}
-                onChange={(newValue) => setDataFinal(newValue)}
-              />
-            </LocalizationProvider>
-            <Button variant="outlined" color="secondary" onClick={handleBusca}  >
-          Buscar
-        </Button> 
-        </Box>
-        {hospedagem.length > 0 ? (
+        {tipoListagem === 1 && (
           <>
-          hospedagem.map((hospegem, index) =>(
-             <VerDetalheHospedagem />
-          ))
-         
+            <Box
+              display={"flex"}
+              flexDirection={"column"}
+              width={"100%"}
+              gap={2}
+              marginLeft={3}
+              marginRight={3}
+            >
+              <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                adapterLocale="pt-br"
+              >
+                <DatePicker
+                  label="Data Inicial"
+                  format="DD/MM/YYYY"
+                  value={dataInicial}
+                  onChange={(newValue) => setDataInicial(newValue)}
+                />
+                <DatePicker
+                  label="Data Final"
+                  format="DD/MM/YYYY"
+                  value={dataFinal}
+                  onChange={(newValue) => setDataFinal(newValue)}
+                />
+              </LocalizationProvider>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={handleBusca}
+              >
+                Buscar
+              </Button>
+            </Box>
+            {buscaRealizada && dataInicial && dataFinal ? ( 
+              hospedagem.length > 0 ? (
+                hospedagem.map((hospedagemItem, index) => (
+                  <VerDetalheHospedagem
+                    key={index}
+                    hospedagem={hospedagemItem}
+                  />
+                ))
+              ) : (
+                <Box marginTop={2}>
+                  <Typography>Nenhuma hospedagem encontrada.</Typography>
+                </Box>
+              )
+            ) : null}
           </>
-
         )}
-        
-        
-        </>
-      )}
-      
-      
+
+        {tipoListagem === 2 && (
+          <>
+            <Box
+              display={"flex"}
+              flexDirection={"column"}
+              width={"100%"}
+              gap={2}
+            >
+              <BuscaCliente onClientChange={handleClienteChange} />
+            </Box>
+            {cliente && hospedagem.length > 0
+              ? hospedagem.map((hospedagemItem, index) => (
+                  <VerDetalheHospedagem
+                    key={index}
+                    hospedagem={hospedagemItem}
+                  />
+                ))
+              : cliente && (
+                  <Box marginTop={2}>
+                    <Typography>Nenhuma hospedagem encontrada.</Typography>
+                  </Box>
+                )}
+          </>
+        )}
       </Box>
     </LayoutBaseDePagina>
   );

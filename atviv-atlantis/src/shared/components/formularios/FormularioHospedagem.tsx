@@ -77,17 +77,17 @@ export function FormularioHospedagem({
   }
 
   // Função para verificar se a data está reservada
-  const isDateReserved = (
+  function isDateReserved(
     date: Date,
     reservas: { inicio: Date; fim: Date }[]
-  ): boolean => {
+  ): boolean{
     return reservas.some(
       (reserva) => date >= reserva.inicio && date <= reserva.fim
     );
   };
 
   // Função para desabilitar datas reservadas no calendário
-  const shouldDisableDate = (date: Dayjs) => {
+  function shouldDisableDate(date: Dayjs){
     const jsDate = date.toDate();
     const today = new Date()
     today.setHours(0, 0, 0, 0); 
