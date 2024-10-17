@@ -14,6 +14,7 @@ import { useState, useEffect } from "react";
 import { Seletor } from "../seletor/Seletor";
 import dayjs, { Dayjs } from "dayjs";
 import { ICliente, IEndereco } from "../../interfaces";
+import { DatePicker } from "@mui/x-date-pickers";
 
 interface ITelefone {
   id: number;
@@ -183,7 +184,7 @@ export function FormularioCliente({ onSaveCliente, clienteEditavel }: Formulario
             value={nome}
             onChange={(e)=> handleNomeChange(e.target.value)}
           />
-
+          <Box  display="flex" gap={1} alignItems={smDown? 'center': 'flex-end'}  flexDirection={smDown ? "column" : "row"}>
           <TextField
             id="outlined-basic"
             label="E-Mail"
@@ -194,17 +195,17 @@ export function FormularioCliente({ onSaveCliente, clienteEditavel }: Formulario
             onChange={(e)=> handleEmailChange(e.target.value)}
           />
 
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
             <DemoContainer components={["DateField"]}>
-              <DateField
+              <DatePicker
                 label="Data de Nascimento"
                 format="DD/MM/YYYY"
-                fullWidth
                 value={dataNascimento}
                 onChange={(newValue: Dayjs | null) => handleDataNascimento(newValue)}
               />
             </DemoContainer>
           </LocalizationProvider>
+          </Box>
         </Box>
       </Box>
       <Box height="100%" display="flex" flexDirection="column" gap={2}>
@@ -219,7 +220,8 @@ export function FormularioCliente({ onSaveCliente, clienteEditavel }: Formulario
                 handleDocumentoChange(index, "tipo", event.target.value)
               }
             />
-            <TextField
+            <Box  display="flex" gap={1} alignItems={smDown? 'center': 'flex-end'} flexDirection={smDown ? "column" : "row"}>
+             <TextField
               label="Número do Documento"
               placeholder="Digite o número do documento"
               value={documento.numero}
@@ -228,19 +230,20 @@ export function FormularioCliente({ onSaveCliente, clienteEditavel }: Formulario
               }
               fullWidth
             />
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
               <DemoContainer components={["DateField"]}>
-                <DateField
+                <DatePicker
                   label="Data de Expedição"
                   value={documento.dataExpedicao}
                   onChange={(newValue) =>
                     handleDocumentoChange(index, "dataExpedicao", newValue)
                   }
                   format="DD/MM/YYYY"
-                  fullWidth
                 />
               </DemoContainer>
-            </LocalizationProvider>
+            </LocalizationProvider> 
+            </Box>
+            
             {documentos.length > 1 ? (
               <Button
                 variant="outlined"

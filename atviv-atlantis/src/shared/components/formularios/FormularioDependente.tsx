@@ -14,6 +14,7 @@ import {
   import { Seletor } from "../seletor/Seletor";
   import { Dayjs } from "dayjs";
 import { Documento, ICliente, IDependente } from "../../interfaces";
+import { DatePicker } from "@mui/x-date-pickers";
   
 interface FormularioDependenteProps{
     onSaveDependente: (dependete: IDependente)=> void
@@ -26,7 +27,9 @@ interface FormularioDependenteProps{
     const [dataNascimento, setDataNascimento] = useState<Dayjs | null>(null);
     const [documentos, setDocumentos] = useState<Documento[]>([
       { id: 0, tipo: "", numero: "", dataExpedicao: null },
-    ]);
+    ])
+    const theme = useTheme();
+    const smDown = useMediaQuery(theme.breakpoints.down("sm"));
 
     const tiposDocumentos = [
       { value: "CPF", label: "Cadastro de Pessoas Física" },
@@ -150,28 +153,30 @@ interface FormularioDependenteProps{
                   handleDocumentoChange(index, "tipo", event.target.value)
                 }
               />
+              <Box  display="flex" gap={1} alignItems={smDown? 'center': 'flex-end'} flexDirection={smDown ? "column" : "row"}>
               <TextField
-                label="Número do Documento"
-                placeholder="Digite o número do documento"
-                value={documento.numero}
-                onChange={(event) =>
-                  handleDocumentoChange(index, "numero", event.target.value)
-                }
-                fullWidth
-              />
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["DateField"]}>
-                  <DateField
-                    label="Data de Expedição"
-                    value={documento.dataExpedicao}
-                    onChange={(newValue) =>
-                      handleDocumentoChange(index, "dataExpedicao", newValue)
-                    }
-                    format="DD/MM/YYYY"
-                    fullWidth
-                  />
-                </DemoContainer>
-              </LocalizationProvider>
+               label="Número do Documento"
+               placeholder="Digite o número do documento"
+               value={documento.numero}
+               onChange={(event) =>
+                 handleDocumentoChange(index, "numero", event.target.value)
+               }
+               fullWidth
+             />
+             <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
+               <DemoContainer components={["DateField"]}>
+                 <DatePicker
+                   label="Data de Expedição"
+                   value={documento.dataExpedicao}
+                   onChange={(newValue) =>
+                     handleDocumentoChange(index, "dataExpedicao", newValue)
+                   }
+                   format="DD/MM/YYYY"
+                 />
+               </DemoContainer>
+             </LocalizationProvider> 
+             </Box>
+             
               {documentos.length > 1 ? (
                 <Button
                   variant="outlined"

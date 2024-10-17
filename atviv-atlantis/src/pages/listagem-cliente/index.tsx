@@ -5,13 +5,21 @@ import { useState } from "react";
 import { CardCliente } from "../../shared/components/lista/CardCliente";
 import { ICliente, IDocumento, ITelefone } from "../../shared/interfaces";
 import dayjs from "dayjs";
+import { BuscaCliente } from "../../shared/components/busca/BuscaCliente";
 
 
 export function ListagemCliente() {
-  const [tipoListagem, setTipoListagem] = useState<string | number>("");
+  const [tipoListagem, setTipoListagem] = useState<string | number>("")
+  const [cliente, setCliente] = useState<ICliente | null>(null)
 
   function handleTipoClienteValue(e: SelectChangeEvent<string | number>) {
     setTipoListagem(e.target.value)
+    
+  }
+
+  function handleClienteChange(cliente: ICliente | null) {
+    console.log(cliente);
+    setCliente(cliente);
   }
 
   const listagemOptions = [
@@ -103,20 +111,54 @@ export function ListagemCliente() {
 
   return (
     <LayoutBaseDePagina title="Listagem">
-      <Box margin={3}>
-        <Seletor
+      <Box display={"flex"} flexDirection={"column"} gap={1} >
+        <Box marginLeft={3} marginRight={3} marginTop={3}>
+         <Seletor
           title="Tipo de Listagem"
           value={tipoListagem}
           options={listagemOptions}
           handleChangeValue={handleTipoClienteValue}
-        />
-      </Box>
-      <Box display={"flex"} flexDirection={"row"} flexWrap="wrap" justifyContent="center">
-      {tipoListagem !== "" && clientes.map((cliente, index) => (
-          <CardCliente key={index} cliente={cliente} />
-        ))}
+        /> 
+        </Box>
+        
       
-      </Box>
+      <Box display={"flex"} flexDirection={"row"} flexWrap="wrap" >
+      {tipoListagem === 0  && clientes.map((cliente, index) => (
+        <Box display={"flex"} marginLeft={2}>
+          <CardCliente key={index} cliente={cliente} />
+        </Box>
+          
+        ))}
+       {tipoListagem === 1 && (
+          <>
+          <Box width={'100%'}>
+            <BuscaCliente onClientChange={handleClienteChange} />
+          </Box>
+          <Box display={'flex'} marginLeft={2}>
+            {cliente &&
+              clientes
+                .filter((c) => c.titular)
+                .map((cliente, index) => <CardCliente key={index} cliente={cliente} />)}
+          </Box>
+            
+          </>
+        )}
+        {tipoListagem === 2 && (
+          <>
+            <Box display={"flex"} flexDirection={"column"} width={"100%"}>
+            <BuscaCliente onClientChange={handleClienteChange} />
+          </Box>
+          <Box marginLeft={2}display={'flex'}>
+            {cliente &&
+              clientes
+                .filter((c) => c.titular === false)
+                .map((cliente, index) => <CardCliente key={index} cliente={cliente} />)}
+          </Box>
+            
+          </>
+        )}
+      
+      </Box></Box>
     </LayoutBaseDePagina>
   );
 }

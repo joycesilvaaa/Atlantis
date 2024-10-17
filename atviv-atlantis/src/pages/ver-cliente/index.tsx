@@ -69,7 +69,7 @@ export function VerCliente() {
         {cliente && (
           <>
             <VerDetalheCliente cliente={cliente} />
-            <Box display={"flex"} justifyContent={"center"} gap={1}>
+            <Box display={"flex"} justifyContent={"center"} gap={1} margin={"10px"}>
               <Button variant="outlined" color="secondary" onClick={handleClickVoltar}>
               Listagem de Clientes
             </Button>

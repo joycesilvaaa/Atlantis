@@ -55,7 +55,7 @@ export function BuscaCliente({ onClientChange }: BuscaClienteProps){
     <Box margin={3} display={"flex"} flexDirection={"column"} gap={1} alignItems={"center"}>
       <TextField
         id="outlined-basic"
-        label="Documento do titular"
+        label="Documento do Cliente"
         placeholder="Digite o numero do documento"
         multiline
         fullWidth
