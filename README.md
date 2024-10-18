@@ -8,4 +8,4 @@
 1. Altere para a branch `atvii`.
 1. Execute `npm install` para instalar as dependências do projeto.
 2. Execute `npx tsc` para compilar o código TypeScript.
-3. Vá para `src/js` e execute `node index.js`.
+3. Vá para `src/js/app/` e execute `node app.js`.
