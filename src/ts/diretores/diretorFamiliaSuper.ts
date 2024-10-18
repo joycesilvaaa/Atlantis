@@ -18,6 +18,7 @@ export default class DiretorFamiliaSuper extends Diretor<Acomodacao> {
         objetoConstrutor.Suite = 3
         objetoConstrutor.Climatizacao = true
         objetoConstrutor.Garagem = 2
+        objetoConstrutor.QuantidadeDisponivel = 2
         
         return objetoConstrutor.construir()
     }

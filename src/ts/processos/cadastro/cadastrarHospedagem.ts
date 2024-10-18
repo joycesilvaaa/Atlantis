@@ -7,6 +7,7 @@ import Hospedagem from "../../modelos/hospedagem";
 import EncontraCliente from "../../utils/encontraCliente";
 import EncontraHospedagem from "../../utils/encontraHospedagem";
 import PossuiTitular from "../../utils/possuiTitular";
+import { differenceInDays } from 'date-fns';
 
 export default class CadastrarHospedagem extends Processo {
     private armazem: Armazem;
@@ -65,9 +66,21 @@ export default class CadastrarHospedagem extends Processo {
                 console.log('Opção inválida.');
                 return;
         }
+        const acomodacaoSelecionada = this.armazem.Acomodacoes[acomodacao - 1]; 
+        if (Number(acomodacaoSelecionada.QuantidadeDisponivel) < 1) {
+            console.log('Desculpe, não há acomodações disponíveis para a seleção.');
+            return;
+        }
 
         let dataInicial = this.entrada.receberData('Digite a data inicial da reserva');
         let dataFinal = this.entrada.receberData('Digite a data final da hospedagem')
+
+        const diasReservados = differenceInDays(dataFinal, dataInicial);
+        if (diasReservados <= 0) {
+            console.log('A data final deve ser posterior à data inicial.');
+            return;
+        }
+
         let hospedagem = new Hospedagem(nomeHospedagem, cliente, dataInicial, dataFinal)
 
         let hospedagemExistente= EncontraHospedagem(this.armazem.Hospedagem,hospedagem.Cliente,hospedagem.DataInicial, hospedagem.DataFinal)
@@ -77,6 +90,7 @@ export default class CadastrarHospedagem extends Processo {
             return;
         }
 
+        acomodacaoSelecionada.setQuantidadeDisponivel(Number(acomodacaoSelecionada.QuantidadeDisponivel) - 1)
         this.armazem.Hospedagem.push(hospedagem)
        console.log('---------------------------------------------------');
         console.log('               HOSPEDAGEM RESERVADA')

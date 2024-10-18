@@ -79,15 +79,21 @@ export default class EditarHospedagem extends Processo {
 
     private editaDataInical(hospedagem: Hospedagem){
         let data = this.entrada.receberData('Digite a data inicial da hospedagem')
-        if(data && !isNaN(data.getTime())){
+        if(data && !isNaN(data.getTime()) && data < hospedagem.DataFinal){
            hospedagem.setDataInicial(data) 
+        }else {
+            console.log('Data inválida ou anterior à data final.');
+            return
         }
     }
 
     private editaDataFinal(hospedagem: Hospedagem){
         let data = this.entrada.receberData('Digite a data final da hospedagem')
-        if(data && !isNaN(data.getTime())){
+        if(data && !isNaN(data.getTime()) && hospedagem.DataInicial> data){
            hospedagem.setDataFinal(data) 
+        }else {
+            console.log('Data inválida ou anterior à data inicial.')
+            return
         }
     }
 }

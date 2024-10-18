@@ -18,7 +18,7 @@ export default class DiretorCasalSimples extends Diretor<Acomodacao> {
         objetoConstrutor.Suite = 1
         objetoConstrutor.Climatizacao = true
         objetoConstrutor.Garagem = 1
-        
+        objetoConstrutor.QuantidadeDisponivel = 2
         return objetoConstrutor.construir()
     }
 }

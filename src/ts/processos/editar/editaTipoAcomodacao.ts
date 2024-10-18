@@ -47,6 +47,11 @@ export default class EditarTipoAcomodacao extends Processo {
                 console.log('Opção inválida.');
                 return;
         }
+        const acomodacaoSelecionada = this.armazem.Acomodacoes[acomodacao - 1]; 
+        if (Number(acomodacaoSelecionada.QuantidadeDisponivel) < 1) {
+            console.log('Desculpe, não há acomodações disponíveis para a seleção.');
+            return;
+        }
         this.hospedagem.setAcomodacao(nomeHospedagem)
     }
 }

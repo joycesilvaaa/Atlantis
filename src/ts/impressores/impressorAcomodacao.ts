@@ -12,7 +12,8 @@ export default class ImpressorAcomodacao implements Impressor {
             + `-- Quantidade de leitos para casais: ${this.acomodacao.CamaCasal}\n`
             + `-- Climatização: ${this.converterBooleano(this.acomodacao.Climatizacao)}\n`
             + `-- Quantidade de garagens disponíveis: ${this.acomodacao.Garagem}\n`
-            + `-- Quantidade de suites: ${this.acomodacao.Suite}`
+            + `-- Quantidade de suites: ${this.acomodacao.Suite}\n`
+            + `-- Quantidade de disponivel: ${this.acomodacao.QuantidadeDisponivel}`
         return descricao
     }
 

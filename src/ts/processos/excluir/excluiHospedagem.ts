@@ -43,7 +43,19 @@ export default class ExcluirHospedagem extends Processo {
             console.log('Erro ao desassociar hospedagem do cliente: Hospedagem não encontrada na lista.');
             return;
         }
+
+        const indiceAcomodacao = this.armazem.Acomodacoes.findIndex(acomodacao => 
+            acomodacao.NomeAcomadacao === hospedagem.Acomodacao
+        );
         
+        if (indiceAcomodacao === -1) {
+            console.log('Erro ao localizar a acomodação.');
+            return;
+        }
+
+        const quantidadeAtual = this.armazem.Acomodacoes[indiceAcomodacao].QuantidadeDisponivel
+        this.armazem.Acomodacoes[indiceAcomodacao].setQuantidadeDisponivel(Number(quantidadeAtual) + 1);
+
         this.armazem.Hospedagem.splice(indice, 1)
         
         console.log('---------------------------------------------------');
